@@ -8,10 +8,17 @@ var temperature_unfreeze : float = -200.0
 
 @export var player : Node3D
 
+var is_generator_off : bool = false
+
 var is_game_over : bool = false
 
 func _ready() -> void:
 	AllSignals.jumpscare.connect(_on_jumpscare)
+	AllSignals.generator_state.connect(_on_shutdown)
+
+func _on_shutdown(test: bool) -> void:
+	is_generator_off = test
+	print("gen off start heat")
 
 func _on_jumpscare(_player : Node3D) -> void:
 	is_game_over = true
@@ -30,4 +37,5 @@ func _temperature(delta: float) -> void:
 
 func _process(delta) -> void:
 	if is_game_over: return
+	if not is_generator_off: return
 	_temperature(delta)

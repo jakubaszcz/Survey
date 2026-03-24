@@ -36,4 +36,4 @@ func _physics_process(delta) -> void:
 		var hit: Object = ray.get_collider()
 		if hit.is_in_group("interactable"):
 			if Input.is_action_pressed("interact") and not jumpscare:
-				hit._on_press()
+				hit._on_interact()

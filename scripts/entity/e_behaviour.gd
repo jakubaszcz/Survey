@@ -7,13 +7,6 @@ enum monster_states {
 	UNFROZEN,
 }
 
-func _ready() -> void:
-	AllSignals.temperature.connect(_on_temperature)
-
-func _on_temperature(temperature : float) -> void:
-	if temperature >= -200:
-		AllSignals.emit_signal("jumpscare", self)
-
 func _idle() -> void:
 	if animation.is_playing(): return
 	animation.play("idle")

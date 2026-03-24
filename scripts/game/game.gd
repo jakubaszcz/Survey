@@ -16,9 +16,9 @@ func _ready() -> void:
 	AllSignals.jumpscare.connect(_on_jumpscare)
 	AllSignals.generator_state.connect(_on_shutdown)
 
-func _on_shutdown(test: bool) -> void:
-	is_generator_off = test
-	print("gen off start heat")
+func _on_shutdown(state: bool) -> void:
+	if not state: return
+	is_generator_off = state
 
 func _on_jumpscare(_player : Node3D) -> void:
 	is_game_over = true

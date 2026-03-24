@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://c5lj27wln3b5"]
 
+[ext_resource type="Script" uid="uid://djbvohki57kjf" path="res://scripts/game/game.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bgvo6jt7iblgw" path="res://nodes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://cuwahm6rxvtum" path="res://nodes/entity.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://cmlxouktiqkca" path="res://nodes/interactable/button/button.tscn" id="4_lbhrr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8cj0n"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -16,7 +18,9 @@ sky = SubResource("Sky_uwrxv")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Game" type="Node3D" unique_id=61270930]
+[node name="Game" type="Node3D" unique_id=61270930 node_paths=PackedStringArray("player")]
+script = ExtResource("1_lnu2h")
+player = NodePath("Player")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2081950051]
 environment = SubResource("Environment_yqjtg")
@@ -36,3 +40,6 @@ size = Vector3(10, 1, 20.179688)
 
 [node name="Entity" parent="." unique_id=800150846 instance=ExtResource("2_yqjtg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -14)
+
+[node name="Button" parent="." unique_id=801678364 instance=ExtResource("4_lbhrr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8866155, -2.7933388, -6.5961847)

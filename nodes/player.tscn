@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bcw7bv3ptxd2j" path="res://scripts/player/p_movement.gd" id="1_u63mc"]
 [ext_resource type="Script" uid="uid://dcin8wg6xix66" path="res://scripts/player/p_head.gd" id="2_dcin8"]
+[ext_resource type="PackedScene" uid="uid://d0dgp65db21vv" path="res://nodes/interfaces/crosshair.tscn" id="3_me0cc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qyyhd"]
 
@@ -17,8 +18,14 @@ shape = SubResource("CapsuleShape3D_qyyhd")
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_u63mc")
 
-[node name="Head" type="Node3D" parent="." unique_id=1419401686]
+[node name="Head" type="Node3D" parent="." unique_id=1419401686 node_paths=PackedStringArray("ray")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9355521, 0)
 script = ExtResource("2_dcin8")
+ray = NodePath("Camera3D/RayCast3D")
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=1689534905]
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=1092542181]
+target_position = Vector3(0, 0, -3)
+
+[node name="Crosshair" parent="." unique_id=1607817877 instance=ExtResource("3_me0cc")]

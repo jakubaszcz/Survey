@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var camera: Camera3D = $Camera3D
 
+@export var ray : RayCast3D
 
 var sensivity : float = 0.002
 var camera_rotation_x : float = 0.0
@@ -28,3 +29,11 @@ func _mouse_movement(event):
 			camera.rotation.x = camera_rotation_x
 	else:
 		camera.rotation.x = deg_to_rad(0)
+
+func _physics_process(delta) -> void:
+	
+	if ray and ray.is_colliding():
+		var hit: Object = ray.get_collider()
+		if hit.is_in_group("interactable"):
+			if Input.is_action_pressed("interact") and not jumpscare:
+				hit._on_press()

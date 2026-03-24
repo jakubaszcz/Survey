@@ -4,6 +4,23 @@ extends CharacterBody3D
 @onready var walk_speed : float = 10.0
 @onready var sprint_speed : float = 20.0
 
+@export var monster : CharacterBody3D
+
+var jumscare : bool = false
+
+func _ready() -> void:
+	AllSignals.jumpscare.connect(_on_jumpscare)
+
+
+func _on_jumpscare(player : Node3D) -> void:
+	jumscare = true
+
+func _input(event) -> void:
+	if event is InputEventKey:
+		if event.pressed:
+			if event.keycode == KEY_J:
+				AllSignals.emit_signal("jumpscare", self)
+
 func _movement_process(delta) -> void:
 	var input: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction: Vector3 = transform.basis * Vector3(input.x, 0, input.y)
@@ -13,6 +30,7 @@ func _movement_process(delta) -> void:
 	velocity = direction * current_speed
 
 func _physics_process(delta) -> void:
+	if jumscare: return
 	_movement_process(delta)
 	
 	move_and_slide()

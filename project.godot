@@ -10,10 +10,18 @@ config_version=5
 
 [application]
 
-config/name="Nouveau projet de jeu"
+config/name="Survey"
 run/main_scene="uid://c5lj27wln3b5"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+AllSignals="*uid://bxbxu2gk7wxcd"
+
+[display]
+
+window/size/mode=3
 
 [input]
 

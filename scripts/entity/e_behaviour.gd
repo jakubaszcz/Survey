@@ -7,9 +7,15 @@ enum monster_states {
 	UNFROZEN,
 }
 
+func _ready() -> void:
+	add_to_group("entity")
+
 func _idle() -> void:
 	if animation.is_playing(): return
 	animation.play("idle")
+
+func _on_interact() -> void:
+	print("interact with syringe")
 
 func _process(delta: float) -> void:
 	_idle()

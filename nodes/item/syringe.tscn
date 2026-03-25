@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c43gf6bi3dyvv"]
+
+[ext_resource type="PackedScene" uid="uid://db84ag8xkvhq" path="res://assets/syringe/medical_syringe.glb" id="1_7vdso"]
+[ext_resource type="Script" uid="uid://ddatsifnihxgj" path="res://scripts/item/syringe/syringe.gd" id="1_7222l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7222l"]
+size = Vector3(2.045044, 1, 1)
+
+[node name="Syringe" type="CharacterBody3D" unique_id=1032968558]
+script = ExtResource("1_7222l")
+
+[node name="Sketchfab_Scene" parent="." unique_id=723005557 instance=ExtResource("1_7vdso")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1285597649]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522522, 0, 0)
+shape = SubResource("BoxShape3D_7222l")

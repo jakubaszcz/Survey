@@ -4,6 +4,11 @@ extends Node3D
 
 @export var ray : RayCast3D
 
+@export var hand : Node
+
+var hand_item : Item = null
+var hand_item_type : ItemType.type = ItemType.type.Item
+
 var sensivity : float = 0.002
 var camera_rotation_x : float = 0.0
 
@@ -31,9 +36,19 @@ func _mouse_movement(event):
 		camera.rotation.x = deg_to_rad(0)
 
 func _physics_process(delta) -> void:
-	
 	if ray and ray.is_colliding():
 		var hit: Object = ray.get_collider()
+		if hit.is_in_group("entity"):
+			if Input.is_action_pressed("interact") and not jumpscare:
+				if hand_item_type == ItemType.type.Syringe:
+					hit._on_interact()
 		if hit.is_in_group("interactable"):
 			if Input.is_action_pressed("interact") and not jumpscare:
 				hit._on_interact(delta)
+		if hit is Item:
+			if Input.is_action_pressed("interact") and not jumpscare:
+				if hand_item:
+					hand_item.queue_free()
+				hand_item = hit._hold(hand)
+				hand_item_type = hand_item.item_type
+			

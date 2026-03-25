@@ -42,6 +42,7 @@ func _physics_process(delta) -> void:
 			if Input.is_action_pressed("interact") and not jumpscare:
 				if hand_item_type == ItemType.type.Syringe:
 					hit._on_interact()
+					hand_item_type = ItemType.type.Item
 		if hit.is_in_group("interactable"):
 			if Input.is_action_pressed("interact") and not jumpscare:
 				hit._on_interact(delta)

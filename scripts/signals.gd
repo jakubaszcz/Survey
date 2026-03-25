@@ -1,5 +1,6 @@
 extends Node
 
-signal jumpscare(player : Vector3)
+signal jumpscare(player : Node3D)
 signal temperature(temperature : float)
 signal generator_state(test: bool)
+signal examine(test: bool)

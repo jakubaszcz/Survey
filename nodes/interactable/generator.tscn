@@ -2730,3 +2730,4 @@ shape = SubResource("BoxShape3D_yjtuk")
 
 [node name="Generator" type="AudioStreamPlayer3D" parent="." unique_id=1255797114]
 stream = ExtResource("5_uu3dg")
+volume_db = -20.0

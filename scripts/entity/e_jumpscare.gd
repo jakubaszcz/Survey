@@ -7,6 +7,8 @@ func _ready() -> void:
 	AllSignals.jumpscare.connect(_on_jumpscare)
 
 func _on_jumpscare(player : Node3D) -> void:
+	if not player:
+		return
 	var forward: Vector3 = -player.global_transform.basis.z
 	forward.y = 0
 	forward = forward.normalized()

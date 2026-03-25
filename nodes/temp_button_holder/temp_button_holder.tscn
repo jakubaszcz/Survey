@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dhc3gckqdh73e"]
+
+[ext_resource type="PackedScene" uid="uid://dxbmjl5ibrmc" path="res://nodes/button/button.tscn" id="1_y5gk0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dqrb"]
+size = Vector3(1, 2.2635498, 1)
+
+[node name="TempButtonHolder" type="CharacterBody3D" unique_id=200164149]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1536558950]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6288452, 0)
+size = Vector3(1, 2.2576904, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1187176123]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6317749, 0)
+shape = SubResource("BoxShape3D_7dqrb")
+
+[node name="Button" parent="." unique_id=603275358 instance=ExtResource("1_y5gk0")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.013807714, 1.9237225, 0.26044405)

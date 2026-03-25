@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://beojl2xerh1v2"]
+
+[ext_resource type="Script" uid="uid://d0dvtfh4lmc46" path="res://scripts/examine_light/examine_light.gd" id="1_d5xgn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5xgn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oe4v6"]
+
+[node name="ExamineLight" type="CharacterBody3D" unique_id=422393135]
+script = ExtResource("1_d5xgn")
+examine_light = SubResource("StandardMaterial3D_d5xgn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1515122513]
+shape = SubResource("BoxShape3D_oe4v6")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=111424568]
+material = SubResource("StandardMaterial3D_d5xgn")

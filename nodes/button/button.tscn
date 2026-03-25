@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dxbmjl5ibrmc"]
+
+[ext_resource type="PackedScene" uid="uid://bb5886wib5jru" path="res://assets/button/button__modeling_practice_yadira (1).glb" id="1_14jgq"]
+[ext_resource type="Script" uid="uid://dxw558ybs0mnb" path="res://scripts/interactable/button/b_behaviour.gd" id="1_r1wgb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r1wgb"]
+size = Vector3(2.2167358, 1.4542236, 2.3007813)
+
+[node name="Button" type="CharacterBody3D" unique_id=603275358]
+script = ExtResource("1_r1wgb")
+
+[node name="Sketchfab_Scene" parent="." unique_id=2141286333 instance=ExtResource("1_14jgq")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 3.9616256)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=142193527]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04055786, 0.22711182, -0.6503906)
+shape = SubResource("BoxShape3D_r1wgb")

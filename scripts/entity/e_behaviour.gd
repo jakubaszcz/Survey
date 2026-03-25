@@ -3,18 +3,28 @@ extends CharacterBody3D
 @export var animation : AnimationPlayer
 @export var player : Node3D
 
-@onready var temperature : float = -273.15
-var temperature_max : float = -273.15
-var temperature_min : float = -200.0	
+
+@onready var syringe : int = 0
+var syringe_max : int = 100
+var syringe_min : int = 0
+var syring_prob : int = 10
+var is_internal_bleeding = false
+
+@onready var temperature : float = -110
+var temperature_max : float = -110
+var temperature_min : float = 10	
 var temperature_delta : float = 1.0
+var internal_bleeding_temperature_delta : float = 1.5
 var temperature_timer : float = 0.0
 var generator_off_temperature_time : float = 0.8
 var generator_on_temperature_time : float = 1.8
-var temperature_unfreeze : float = -200.0
+var temperature_unfreeze : float = 10
 
 var fluid : int = 100
 var fluid_timer : float = 0.0
-var fluid_time : float = 2.0
+var fluid_time : float = 5.0
+var fluid_delta : int = 1
+var internal_bleeding_fluid_time : float = 3.0
 
 var fail_prob_max : int = 100
 var fail_prob_min : int = 5
@@ -33,6 +43,11 @@ func _ready() -> void:
 	AllSignals.jumpscare.connect(_on_jumpscare_signal)
 	AllSignals.generator_state.connect(_on_shutdown)
 	AllSignals.rise_temperature.connect(_on_temperature)
+	AllSignals.internal_bleeding.connect(_on_internal_bleeding)
+
+func _on_internal_bleeding(state: bool) -> void:
+	syringe = 0
+	is_internal_bleeding = state
 
 func _on_temperature(new_temperature: float) -> void:
 	temperature -= new_temperature
@@ -50,6 +65,8 @@ func _idle() -> void:
 	animation.play("idle")
 
 func _on_interact() -> void:
+	syringe += 1
+	var syringe_rand: int = randi_range(syringe_min, syringe_max)
 	var rand: int = randi_range(fail_prob_min, fail_prob_max)
 	var type : ExamineType.type = ExamineType.type.Nothing
 	
@@ -58,9 +75,11 @@ func _on_interact() -> void:
 	else:
 		var diff_temp = abs(temperature - temperature_max) / abs(temperature_max)
 		var diff_fluid = abs(fluid - 100) / abs(100)
+		if syringe_rand <= syring_prob + (2 * syringe):
+			AllSignals.emit_signal("internal_bleeding", true)
 		if diff_temp > 0.1:
 			type = ExamineType.type.Temperature_lack
-		if diff_fluid > 0.1:
+		if diff_fluid > 0.2:
 			type = ExamineType.type.Fluid_lack
 		else:
 			type = ExamineType.type.Nothing
@@ -76,12 +95,13 @@ func _temperature(delta: float) -> void:
 	temperature_timer += delta
 	
 	var time: float = generator_off_temperature_time if is_generator_off else generator_on_temperature_time
+	var value: float = internal_bleeding_temperature_delta if is_internal_bleeding else temperature_delta
 	
 	if temperature_timer >= time:
 		var fluid_ratio = clamp(fluid / 100.0, 0.0, 1.0)
 		var multiplier = lerp(2.0, 1.0, fluid_ratio)
 		
-		temperature += temperature_delta * multiplier
+		temperature += value * multiplier
 		temperature_timer = 0.0
 		
 		AllSignals.emit_signal("temperature", temperature)
@@ -89,8 +109,12 @@ func _temperature(delta: float) -> void:
 func _fluid(delta: float) -> void:
 	fluid_timer += delta
 	
-	if fluid_timer >= fluid_time:
-		fluid -= 1
+	var time: float = internal_bleeding_fluid_time if is_internal_bleeding else fluid_time
+	
+	if fluid_timer >= time:
+		fluid_timer = 0.0
+		fluid -= fluid_delta
+		AllSignals.emit_signal("fluid", fluid)
 
 func _process(delta: float) -> void:
 	if is_game_over: return

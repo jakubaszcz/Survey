@@ -37,6 +37,14 @@ enum monster_states {
 	FROZEN,
 	UNFROZEN,
 }
+var has_malus : bool = false
+
+var malus_timer : float = 0.0
+var malus_during_timer : float = 0.0
+var malus_duration : float = 10.0
+var malus_time : float = 1.0
+var malus_temperature : float = 2.0
+var malus_fluid : int = 1
 
 func _ready() -> void:
 	add_to_group("entity")
@@ -51,6 +59,11 @@ func _on_internal_bleeding(state: bool) -> void:
 
 func _on_temperature(new_temperature: float) -> void:
 	temperature -= new_temperature
+	
+	if temperature > temperature_max:
+		temperature = temperature_max
+		has_malus = true
+	
 	print("New temperature: " + str(temperature))
 
 func _on_shutdown(state: bool) -> void:
@@ -63,6 +76,24 @@ func _on_jumpscare_signal(_player : Node3D) -> void:
 func _idle() -> void:
 	if animation.is_playing(): return
 	animation.play("idle")
+
+func _on_pill() -> void:
+	if is_internal_bleeding: 
+		AllSignals.emit_signal("internal_bleeding", false)
+	else:
+		has_malus = true
+
+func _malus(delta: float) -> void:
+	malus_timer += delta
+	malus_during_timer += delta
+	
+	if malus_during_timer >= malus_duration:
+		has_malus = false
+		return
+	
+	if malus_timer >= malus_time:
+		temperature += malus_temperature
+		fluid -= malus_fluid
 
 func _on_interact() -> void:
 	syringe += 1
@@ -123,7 +154,10 @@ func _process(delta: float) -> void:
 	
 	_temperature(delta)
 	_fluid(delta)
-		
+	
+	if has_malus:
+		_malus(delta)
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	

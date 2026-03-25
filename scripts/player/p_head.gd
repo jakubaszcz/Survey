@@ -44,6 +44,10 @@ func _physics_process(delta) -> void:
 					hit._on_interact()
 					hand_item.queue_free()
 					hand_item_type = ItemType.type.Item
+				if hand_item_type == ItemType.type.Pill:
+					hit._on_pill()
+					hand_item.queue_free()
+					hand_item_type = ItemType.type.Item
 		if hit.is_in_group("interactable"):
 			if Input.is_action_pressed("interact") and not jumpscare:
 				hit._on_interact(delta)

@@ -2,5 +2,6 @@ extends Node
 
 enum type {
 	Item,
-	Syringe
+	Syringe,
+	Pill
 }

@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c43gf6bi3dyvv" path="res://nodes/item/syringe.tscn" id="8_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://xhb1ytref4gj" path="res://nodes/furniture/table/serynge_table.tscn" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://beojl2xerh1v2" path="res://nodes/examine_light/examine_light.tscn" id="9_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://dhc3gckqdh73e" path="res://nodes/temp_button_holder/temp_button_holder.tscn" id="9_vtaks"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8cj0n"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -81,3 +82,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.669412, 2.8145523, -1.922
 
 [node name="ExamineLight" parent="." unique_id=422393135 instance=ExtResource("9_0tnpc")]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -12.93308, 2.96222, -2.868721)
+
+[node name="TempButtonHolder" parent="." unique_id=200164149 instance=ExtResource("9_vtaks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7183268, 1, -12.288533)

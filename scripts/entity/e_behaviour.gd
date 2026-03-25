@@ -32,6 +32,11 @@ func _ready() -> void:
 	add_to_group("entity")
 	AllSignals.jumpscare.connect(_on_jumpscare_signal)
 	AllSignals.generator_state.connect(_on_shutdown)
+	AllSignals.rise_temperature.connect(_on_temperature)
+
+func _on_temperature(new_temperature: float) -> void:
+	temperature -= new_temperature
+	print("New temperature: " + str(temperature))
 
 func _on_shutdown(state: bool) -> void:
 	print("Generator state: " + str(state))
@@ -67,11 +72,8 @@ func _temperature(delta: float) -> void:
 	if temperature >= temperature_unfreeze:
 		if player:
 			AllSignals.emit_signal("jumpscare", player)
-		else:
-			push_error("Entity temperature reached unfreeze but 'player' is not assigned in e_behaviour.gd")
 	
 	temperature_timer += delta
-	print(temperature)
 	
 	var time: float = generator_off_temperature_time if is_generator_off else generator_on_temperature_time
 	

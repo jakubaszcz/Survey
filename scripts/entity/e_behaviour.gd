@@ -12,6 +12,10 @@ var generator_off_temperature_time : float = 0.8
 var generator_on_temperature_time : float = 1.8
 var temperature_unfreeze : float = -200.0
 
+var fluid : int = 100
+var fluid_timer : float = 0.0
+var fluid_time : float = 2.0
+
 var fail_prob_max : int = 100
 var fail_prob_min : int = 5
 var fail_prob : int = 15
@@ -48,8 +52,11 @@ func _on_interact() -> void:
 		type = ExamineType.type.Fail
 	else:
 		var diff_temp = abs(temperature - temperature_max) / abs(temperature_max)
+		var diff_fluid = abs(fluid - 100) / abs(100)
 		if diff_temp > 0.1:
 			type = ExamineType.type.Temperature_lack
+		if diff_fluid > 0.1:
+			type = ExamineType.type.Fluid_lack
 		else:
 			type = ExamineType.type.Nothing
 	
@@ -69,9 +76,19 @@ func _temperature(delta: float) -> void:
 	var time: float = generator_off_temperature_time if is_generator_off else generator_on_temperature_time
 	
 	if temperature_timer >= time:
-		temperature += temperature_delta
+		var fluid_ratio = clamp(fluid / 100.0, 0.0, 1.0)
+		var multiplier = lerp(2.0, 1.0, fluid_ratio)
+		
+		temperature += temperature_delta * multiplier
 		temperature_timer = 0.0
+		
 		AllSignals.emit_signal("temperature", temperature)
+
+func _fluid(delta: float) -> void:
+	fluid_timer += delta
+	
+	if fluid_timer >= fluid_time:
+		fluid -= 1
 
 func _process(delta: float) -> void:
 	if is_game_over: return
@@ -79,6 +96,7 @@ func _process(delta: float) -> void:
 	_idle()
 	
 	_temperature(delta)
+	_fluid(delta)
 		
 	if not is_on_floor():
 		velocity += get_gravity() * delta

@@ -43,6 +43,7 @@ func _physics_process(delta) -> void:
 	
 	shutdown_timer += delta
 	if shutdown_timer >= shutdown_time:
+		shutdown_timer = 0.0
 		var random: int = randi_range(shutdown_prob_min, shutdown_prob_max)
 		if random <= shutdown_prob:
 			gen_sound.stop()

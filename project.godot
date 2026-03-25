@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 AllSignals="*uid://bxbxu2gk7wxcd"
 ItemType="*uid://wj2geud7tswx"
+ExamineType="*uid://uuo1aq705a37"
 
 [input]
 

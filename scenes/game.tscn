@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c5lj27wln3b5"]
 
+[ext_resource type="Script" uid="uid://xobwo60f1sxw" path="res://scripts/game/g_behaviour.gd" id="1_rysoc"]
 [ext_resource type="PackedScene" uid="uid://bgvo6jt7iblgw" path="res://nodes/player.tscn" id="1_uwrxv"]
 [ext_resource type="AudioStream" uid="uid://bs0uxavogooo" path="res://thellywellyn-horror-ambience-3-303646.mp3" id="2_trtic"]
 [ext_resource type="PackedScene" uid="uid://cuwahm6rxvtum" path="res://nodes/entity.tscn" id="2_yqjtg"]
@@ -35,6 +36,7 @@ glow_intensity = 1.5
 volumetric_fog_density = 1.0
 
 [node name="Game" type="Node3D" unique_id=61270930]
+script = ExtResource("1_rysoc")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2081950051]
 environment = SubResource("Environment_yqjtg")

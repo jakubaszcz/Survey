@@ -33,7 +33,7 @@ target_position = Vector3(0, 0, -3)
 [node name="Crosshair" parent="." unique_id=1607817877 instance=ExtResource("3_me0cc")]
 
 [node name="Hand" type="Node3D" parent="." unique_id=346181897]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4426241, 0.60281146, -1.4038768)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4426241, 0.60281146, -0.9825678)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=2036108723]
 spot_range = 12.696939

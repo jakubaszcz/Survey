@@ -37,7 +37,9 @@ enum monster_states {
 	FROZEN,
 	UNFROZEN,
 }
-var has_malus : bool = false
+@onready var has_malus : bool = false
+@onready var temperature_error : bool = false
+@onready var fluid_error : bool = false
 
 var malus_timer : float = 0.0
 var malus_during_timer : float = 0.0
@@ -55,12 +57,20 @@ func _ready() -> void:
 	AllSignals.internal_bleeding.connect(_on_internal_bleeding)
 
 func _on_fluid(new_fluid: int) -> void:
+	if fluid_error:
+		AllSignals.emit_signal("action_error")
+		return
+	
 	fluid += new_fluid
 	
 	if fluid > 100:
 		fluid = 100
+		fluid_error = true
 		has_malus = true
+		AllSignals.emit_signal("action_error")
+		return
 	
+	AllSignals.emit_signal("action_success")
 	AllSignals.emit_signal("fluid", fluid)
 
 func _on_internal_bleeding(state: bool) -> void:
@@ -68,13 +78,23 @@ func _on_internal_bleeding(state: bool) -> void:
 	is_internal_bleeding = state
 
 func _on_temperature(new_temperature: float) -> void:
+	if temperature_error:
+		AllSignals.emit_signal("action_error")
+		return
+		
 	temperature -= new_temperature
 	
-	if temperature > temperature_max:
+	if temperature <= temperature_max:
 		temperature = temperature_max
+		temperature_error = true
 		has_malus = true
+		AllSignals.emit_signal("action_error")
+		return
 	
 	AllSignals.emit_signal("temperature", temperature)
+	AllSignals.emit_signal("action_success")
+	print("Temperature: " + str(temperature))
+	return
 
 func _on_shutdown(state: bool) -> void:
 	print("Generator state: " + str(state))
@@ -98,10 +118,14 @@ func _malus(delta: float) -> void:
 	malus_during_timer += delta
 	
 	if malus_during_timer >= malus_duration:
+		malus_during_timer = 0.0
 		has_malus = false
+		temperature_error = false
+		fluid_error = false
 		return
 	
 	if malus_timer >= malus_time:
+		malus_timer = 0.0
 		temperature += malus_temperature
 		fluid -= malus_fluid
 

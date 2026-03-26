@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://vmmuf7wo2fq" path="res://nodes/interfaces/interface.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://n2acbqwah0t7" path="res://nodes/item/pill.tscn" id="11_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://lw7sway85qxu" path="res://nodes/interactable/fluid_pump.tscn" id="12_dinhu"]
+[ext_resource type="Script" uid="uid://cxk62iy2u0kni" path="res://scripts/light/l_behaviour.gd" id="13_kvuet"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8cj0n"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -106,11 +107,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80916214, 8.220747, -5.2371
 use_collision = true
 size = Vector3(30, 1, 30)
 
-[node name="Node3D" type="Node3D" parent="." unique_id=705699592]
+[node name="Node3D" type="Node3D" parent="." unique_id=705699592 node_paths=PackedStringArray("light_1", "light_2")]
+script = ExtResource("13_kvuet")
+light_1 = NodePath("Light1")
+light_2 = NodePath("Light2")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Node3D" unique_id=1186925187]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.939801, 3.4734914)
-visible = false
+[node name="Light1" type="OmniLight3D" parent="Node3D" unique_id=1186925187]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 3)
+light_energy = 10.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+omni_range = 4096.0
+
+[node name="Light2" type="OmniLight3D" parent="Node3D" unique_id=261092675]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.864, 6, -11.971396)
 light_energy = 10.0
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true

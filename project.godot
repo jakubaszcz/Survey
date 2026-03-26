@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Survey"
-run/main_scene="uid://c5lj27wln3b5"
+run/main_scene="uid://cbc7kyfw0xs1h"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

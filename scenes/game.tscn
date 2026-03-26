@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://c5lj27wln3b5"]
 
 [ext_resource type="PackedScene" uid="uid://bgvo6jt7iblgw" path="res://nodes/player.tscn" id="1_uwrxv"]
+[ext_resource type="AudioStream" uid="uid://bs0uxavogooo" path="res://thellywellyn-horror-ambience-3-303646.mp3" id="2_trtic"]
 [ext_resource type="PackedScene" uid="uid://cuwahm6rxvtum" path="res://nodes/entity.tscn" id="2_yqjtg"]
+[ext_resource type="AudioStream" uid="uid://c5ncpuucg04vo" path="res://freesound_community-sci-fi-facility-alarm-loop-96113.mp3" id="3_ir15t"]
 [ext_resource type="PackedScene" uid="uid://dhep7u4lpap7o" path="res://nodes/interactable/generator.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dosqj4ibc3gi8" path="res://nodes/furniture/table/table.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://dp3q3e28dq6cu" path="res://nodes/furniture/table/panel.tscn" id="6_p57ef"]
@@ -13,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://n2acbqwah0t7" path="res://nodes/item/pill.tscn" id="11_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://lw7sway85qxu" path="res://nodes/interactable/fluid_pump.tscn" id="12_dinhu"]
 [ext_resource type="Script" uid="uid://cxk62iy2u0kni" path="res://scripts/light/l_behaviour.gd" id="13_kvuet"]
+[ext_resource type="Script" uid="uid://r3vrl6kk86ig" path="res://scripts/sound/s_behaviour.gd" id="17_rysoc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8cj0n"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -43,6 +46,12 @@ shadow_enabled = true
 [node name="Player" parent="." unique_id=913938230 node_paths=PackedStringArray("monster") instance=ExtResource("1_uwrxv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5166101, 3)
 monster = NodePath("../Entity")
+
+[node name="NormalSound" type="AudioStreamPlayer3D" parent="Player" unique_id=1826307150]
+stream = ExtResource("2_trtic")
+
+[node name="AlarmSound" type="AudioStreamPlayer3D" parent="Player" unique_id=1444985162]
+stream = ExtResource("3_ir15t")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1759058926]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.0898438)
@@ -125,3 +134,8 @@ light_energy = 10.0
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 omni_range = 4096.0
+
+[node name="SoundManager" type="Node3D" parent="." unique_id=945648956 node_paths=PackedStringArray("power_off_sound", "alarm_sound")]
+script = ExtResource("17_rysoc")
+power_off_sound = NodePath("../Player/NormalSound")
+alarm_sound = NodePath("../Player/AlarmSound")

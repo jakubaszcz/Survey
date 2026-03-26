@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://lw7sway85qxu"]
+
+[ext_resource type="Script" uid="uid://bdbyt4ekfr24f" path="res://scripts/fluid_pump/f_behaviour.gd" id="1_1avw4"]
+[ext_resource type="PackedScene" uid="uid://bth7803i1i38p" path="res://assets/fluid_pump/simple_centrifugal_pump_model.glb" id="2_0pv66"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_750lt"]
+size = Vector3(2.5723267, 3.0447998, 6.5411377)
+
+[node name="FluidPump" type="CharacterBody3D" unique_id=469560699]
+script = ExtResource("1_1avw4")
+
+[node name="Sketchfab_Scene" parent="." unique_id=1906791423 instance=ExtResource("2_0pv66")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.14540482, 0, 0.4372778)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=855660172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1993103, 1.0223999, -0.17132568)
+shape = SubResource("BoxShape3D_750lt")

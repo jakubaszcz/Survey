@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dhc3gckqdh73e" path="res://nodes/temp_button_holder/temp_button_holder.tscn" id="9_vtaks"]
 [ext_resource type="PackedScene" uid="uid://vmmuf7wo2fq" path="res://nodes/interfaces/interface.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://n2acbqwah0t7" path="res://nodes/item/pill.tscn" id="11_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://lw7sway85qxu" path="res://nodes/interactable/fluid_pump.tscn" id="12_dinhu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8cj0n"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -20,10 +21,14 @@ ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 sky_material = SubResource("ProceduralSkyMaterial_8cj0n")
 
 [sub_resource type="Environment" id="Environment_yqjtg"]
-background_mode = 2
+background_mode = 1
 sky = SubResource("Sky_uwrxv")
+ambient_light_color = Color(0.072842635, 0.072842635, 0.072842635, 1)
+ambient_light_energy = 0.1
 tonemap_mode = 2
 glow_enabled = true
+glow_intensity = 1.5
+volumetric_fog_density = 1.0
 
 [node name="Game" type="Node3D" unique_id=61270930]
 
@@ -51,24 +56,24 @@ player = NodePath("../Player")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9813833, 1.5766364, -18.555445)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1436477529]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.921318)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4569702, 0.6234741, 9.921318)
 use_collision = true
-size = Vector3(30, 15, 1)
+size = Vector3(30.91394, 16.246948, 1)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=28324471]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.508814, 0, -5.047764)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.508814, 0.62249756, -5.047764)
 use_collision = true
-size = Vector3(30, 15, 1)
+size = Vector3(30, 16.244995, 1)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=341340553]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3611803, 0, -20.101904)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3611803, 0.61950684, -20.101904)
 use_collision = true
-size = Vector3(30, 15, 1)
+size = Vector3(30, 16.239014, 1)
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=412598943]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.882071, 0, -4.8693957)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.882071, 0.61676025, -4.8693957)
 use_collision = true
-size = Vector3(30, 15, 1)
+size = Vector3(30, 16.23352, 1)
 
 [node name="Table" parent="." unique_id=115595550 instance=ExtResource("5_iywne")]
 transform = Transform3D(0.26, 0, 0, 0, 0.26, 0, 0, 0, 0.26, 12.16166, 0.49999952, -19.007175)
@@ -92,3 +97,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7183268, 1, -12.288533)
 
 [node name="Pill" parent="." unique_id=897470479 instance=ExtResource("11_kvpfn")]
 transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, -13.255617, 2.490158, 1.3745182)
+
+[node name="FluidPump" parent="." unique_id=469560699 instance=ExtResource("12_dinhu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.307721, 0.5000005, 0.8173281)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=324615606]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80916214, 8.220747, -5.2371855)
+use_collision = true
+size = Vector3(30, 1, 30)
+
+[node name="Node3D" type="Node3D" parent="." unique_id=705699592]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D" unique_id=1186925187]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.939801, 3.4734914)
+visible = false
+light_energy = 10.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+omni_range = 4096.0

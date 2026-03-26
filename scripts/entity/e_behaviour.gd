@@ -51,7 +51,17 @@ func _ready() -> void:
 	AllSignals.jumpscare.connect(_on_jumpscare_signal)
 	AllSignals.generator_state.connect(_on_shutdown)
 	AllSignals.rise_temperature.connect(_on_temperature)
+	AllSignals.rise_fluid.connect(_on_fluid)
 	AllSignals.internal_bleeding.connect(_on_internal_bleeding)
+
+func _on_fluid(new_fluid: int) -> void:
+	fluid += new_fluid
+	
+	if fluid > 100:
+		fluid = 100
+		has_malus = true
+	
+	AllSignals.emit_signal("fluid", fluid)
 
 func _on_internal_bleeding(state: bool) -> void:
 	syringe = 0
@@ -64,7 +74,7 @@ func _on_temperature(new_temperature: float) -> void:
 		temperature = temperature_max
 		has_malus = true
 	
-	print("New temperature: " + str(temperature))
+	AllSignals.emit_signal("temperature", temperature)
 
 func _on_shutdown(state: bool) -> void:
 	print("Generator state: " + str(state))

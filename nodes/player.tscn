@@ -8,8 +8,9 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u63mc"]
 
-[node name="Player" type="CharacterBody3D" unique_id=913938230]
+[node name="Player" type="CharacterBody3D" unique_id=913938230 node_paths=PackedStringArray("spot_light_3d")]
 script = ExtResource("1_u63mc")
+spot_light_3d = NodePath("SpotLight3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1668261597]
 shape = SubResource("CapsuleShape3D_qyyhd")
@@ -33,3 +34,7 @@ target_position = Vector3(0, 0, -3)
 
 [node name="Hand" type="Node3D" parent="." unique_id=346181897]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4426241, 0.60281146, -1.4038768)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=2036108723]
+spot_range = 12.696939
+spot_angle = 45.53512

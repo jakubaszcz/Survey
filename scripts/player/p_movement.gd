@@ -4,16 +4,23 @@ extends CharacterBody3D
 @onready var walk_speed : float = 10.0
 @onready var sprint_speed : float = 20.0
 
+@export var spot_light_3d: SpotLight3D
+@onready var flashlight_toggle: bool = false
+
 @export var monster : CharacterBody3D
 
 var jumscare : bool = false
 
 func _ready() -> void:
 	AllSignals.jumpscare.connect(_on_jumpscare)
+	spot_light_3d.visible = flashlight_toggle
 
 
 func _on_jumpscare(player : Node3D) -> void:
 	jumscare = true
+
+func _on_flashlight(state: bool) -> void:
+	spot_light_3d.visible = state
 
 func _input(event) -> void:
 	if event is InputEventKey:
@@ -32,5 +39,10 @@ func _movement_process(delta) -> void:
 func _physics_process(delta) -> void:
 	if jumscare: return
 	_movement_process(delta)
+	
+	if Input.is_action_just_pressed("flashlight"):
+		print("Flashlight toggled")
+		flashlight_toggle = not flashlight_toggle
+		_on_flashlight(flashlight_toggle)
 	
 	move_and_slide()

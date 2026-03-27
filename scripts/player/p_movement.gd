@@ -26,6 +26,7 @@ func _input(event) -> void:
 	if event is InputEventKey:
 		if event.pressed:
 			if event.keycode == KEY_J:
+				print("You pressed J You dumbass")
 				AllSignals.emit_signal("jumpscare", self)
 
 func _movement_process(delta) -> void:

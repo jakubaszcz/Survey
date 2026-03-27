@@ -16,13 +16,13 @@ var temperature_min : float = 10
 var temperature_delta : float = 0.6
 var internal_bleeding_temperature_delta : float = 1.2
 var temperature_timer : float = 0.0
-var generator_off_temperature_time : float = 1.0
-var generator_on_temperature_time : float = 1.8
+@onready var generator_off_temperature_time : float = 1.0
+@onready var generator_on_temperature_time : float = 1.8
 var temperature_unfreeze : float = 10
 
 var fluid : int = 100
 var fluid_timer : float = 0.0
-var fluid_time : float = 5.0
+@onready var fluid_time : float = 5.0
 var fluid_delta : int = 1
 var internal_bleeding_fluid_time : float = 3.0
 
@@ -37,6 +37,11 @@ enum monster_states {
 	FROZEN,
 	UNFROZEN,
 }
+
+@onready var times : float = 0.0
+var temp_times : float = 0.1
+var fluid_times : float = 0.6
+
 @onready var has_malus : bool = false
 @onready var temperature_error : bool = false
 @onready var fluid_error : bool = false
@@ -55,6 +60,19 @@ func _ready() -> void:
 	AllSignals.rise_temperature.connect(_on_temperature)
 	AllSignals.rise_fluid.connect(_on_fluid)
 	AllSignals.internal_bleeding.connect(_on_internal_bleeding)
+	AllSignals.timer.connect(_on_time)
+
+func _on_time(time: int) -> void:
+	var hours : int = time / 60
+	print("Time: ", hours, "AM")
+
+	generator_off_temperature_time = generator_off_temperature_time - (temp_times * hours)
+	generator_on_temperature_time = generator_on_temperature_time - (temp_times * hours)
+	fluid_time = fluid_time - (fluid_times * hours)
+
+	print("generator_off_temperature_time:", generator_off_temperature_time)
+	print("generator_on_temperature_time:", generator_on_temperature_time)
+	print("fluid_time:", fluid_time)
 
 func _on_fluid(new_fluid: int) -> void:
 	if fluid_error:
@@ -93,7 +111,6 @@ func _on_temperature(new_temperature: float) -> void:
 	
 	AllSignals.emit_signal("temperature", temperature)
 	AllSignals.emit_signal("action_success")
-	print("Temperature: " + str(temperature))
 	return
 
 func _on_shutdown(state: bool) -> void:
@@ -157,6 +174,7 @@ func _on_interact() -> void:
 func _temperature(delta: float) -> void:
 	if temperature >= temperature_unfreeze:
 		if player:
+			print("Temperature unfreezed, the entity has been freed")
 			AllSignals.emit_signal("jumpscare", player)
 	
 	temperature_timer += delta
@@ -184,7 +202,7 @@ func _fluid(delta: float) -> void:
 		AllSignals.emit_signal("fluid", fluid)
 
 func _process(delta: float) -> void:
-	if is_game_over: return
+	if is_game_over: print("Game Over"); return
 	
 	_idle()
 	
@@ -198,3 +216,5 @@ func _process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	
 	move_and_slide()
+	
+	print ("Temperature: " + str(temperature) + "\nFluid: " + str(fluid) + "\nSyringe: " + str(syringe) + "\n")

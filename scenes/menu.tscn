@@ -37,10 +37,60 @@ text = "Exit"
 
 [node name="Label" type="Label" parent="Control" unique_id=1150288126]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 2.0
+offset_top = -40.0
+offset_right = 216.0
+offset_bottom = 139.0
 theme_override_font_sizes/font_size = 64
-text = "Game"
+text = "Keep it
+Cryo"
+
+[node name="Control2" type="Control" parent="." unique_id=989810297]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -726.0
+offset_top = -274.0
+offset_right = 3.0
+offset_bottom = 278.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control2" unique_id=884270729]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -36.0
+offset_right = 720.0
+offset_bottom = 586.0
+theme_override_font_sizes/font_size = 15
+text = "How to play :
+
+You're a scientist, making experiments on a new form of creature.
+You need to kep it cryo, so you need to handle the temperature, and the fluid.
+
+Take a syringe to make examine and to be aware what's missing ;
+- If it's Black, the test failed
+- Yellow, everything's fine
+- Blue, the temperature begin to heat, you need to press the red button to make it more cold
+- Red, the fluid has being consumed so you need to refill it in the pump
+Be carefull every test can do a internal bleeding, if it happens, take a pill a give him, ASAP!
+
+The cryo thing depends on the generator, if it shut down, just turn it on, but be quick !
+
+Ah, and dont give overdose of temp or fluid, you'll get a bad malus, I mean there are sound 
+you'll know where your screwed up. You need to wait 10 seconds to be able to re use it.
+
+Survive 6 minutes (6 hours ig) 0am to 6am
+
+You won't woke up this dude !
+
+Controls :
+WASD/ZQSD - Move
+E - Interact
+F - Flashlight"
 
 [connection signal="pressed" from="Control/Play" to="Control" method="_on_play_pressed"]
 [connection signal="pressed" from="Control/Exit" to="Control" method="_on_exit_pressed"]

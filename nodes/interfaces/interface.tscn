@@ -13,7 +13,12 @@ script = ExtResource("1_5cr0x")
 
 [node name="Time" type="Label" parent="." unique_id=1575165766]
 layout_mode = 0
-offset_right = 99.0
-offset_bottom = 36.0
+offset_left = 15.0
+offset_top = 10.0
+offset_right = 114.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 26
 text = "0AM"

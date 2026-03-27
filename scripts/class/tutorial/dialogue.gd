@@ -146,6 +146,7 @@ func _on_step_complete(condition: TutorialCondition.Condition) -> void:
 			power_back = true
 			_next_dialogue()
 func _next_dialogue() -> void:
+	if current_step >= dialogue.size(): return
 	if _check_condition(dialogue[current_step]["condition"]):
 		current_step += 1
 		if current_step >= dialogue.size(): return

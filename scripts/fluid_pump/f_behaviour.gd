@@ -25,7 +25,7 @@ func _on_action_error() -> void:
 	error.play()
 
 func _on_generator_state(state: bool) -> void:
-	has_power = state
+	has_power = not state
 
 func _on_interact(delta) -> void:
 	if not has_power: return

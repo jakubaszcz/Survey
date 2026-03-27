@@ -14,6 +14,8 @@ var camera_rotation_x : float = 0.0
 
 var jumpscare : bool = false
 
+var indicate : bool = false
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	AllSignals.jumpscare.connect(_on_jumpscare)
@@ -38,6 +40,14 @@ func _mouse_movement(event):
 func _physics_process(delta) -> void:
 	if ray and ray.is_colliding():
 		var hit: Object = ray.get_collider()
+		if hit.is_in_group("indicator"):
+			if not indicate:
+				var indcator : String = hit._on_indicate()
+				AllSignals.emit_signal("indicate", indcator)
+				indicate = true
+		else:
+			AllSignals.emit_signal("indicate", "")
+			indicate = false
 		if hit.is_in_group("entity"):
 			if Input.is_action_pressed("interact") and not jumpscare:
 				if hand_item_type == ItemType.type.Syringe:

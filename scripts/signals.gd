@@ -19,3 +19,4 @@ signal cooling_end
 signal end_tutorial
 signal send_dialogue(dialogue: String)
 signal step_complete(condition: TutorialCondition.Condition)
+signal indicate(text: String)

@@ -2370,7 +2370,7 @@ libraries/ = SubResource("AnimationLibrary_p33du")
 [node name="Jumpscare" type="AudioStreamPlayer3D" parent="monster" unique_id=1767064227]
 transform = Transform3D(1.4285715, 0, 0, 0, 1.4285715, 0, 0, 0, 1.4285715, 0, 0, 0)
 stream = ExtResource("6_hoixr")
-volume_db = -55.327
+volume_db = -10.0
 
 [node name="Sound" type="Node3D" parent="." unique_id=344964734 node_paths=PackedStringArray("jumscare")]
 script = ExtResource("7_qjnfs")

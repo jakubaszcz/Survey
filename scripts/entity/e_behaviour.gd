@@ -12,11 +12,11 @@ var is_internal_bleeding = false
 
 @onready var temperature : float = -110
 var temperature_max : float = -110
-var temperature_min : float = 10	
-var temperature_delta : float = 1.0
-var internal_bleeding_temperature_delta : float = 1.5
+var temperature_min : float = 10
+var temperature_delta : float = 0.6
+var internal_bleeding_temperature_delta : float = 1.2
 var temperature_timer : float = 0.0
-var generator_off_temperature_time : float = 0.8
+var generator_off_temperature_time : float = 1.0
 var generator_on_temperature_time : float = 1.8
 var temperature_unfreeze : float = 10
 
@@ -44,8 +44,8 @@ enum monster_states {
 var malus_timer : float = 0.0
 var malus_during_timer : float = 0.0
 var malus_duration : float = 10.0
-var malus_time : float = 1.0
-var malus_temperature : float = 2.0
+var malus_time : float = 1.5
+var malus_temperature : float = 0.8
 var malus_fluid : int = 1
 
 func _ready() -> void:
@@ -131,24 +131,26 @@ func _malus(delta: float) -> void:
 
 func _on_interact() -> void:
 	syringe += 1
+	
 	var syringe_rand: int = randi_range(syringe_min, syringe_max)
 	var rand: int = randi_range(fail_prob_min, fail_prob_max)
-	var type : ExamineType.type = ExamineType.type.Nothing
+	var type: ExamineType.type = ExamineType.type.Nothing
 	
 	if rand <= fail_prob:
 		type = ExamineType.type.Fail
 	else:
-		var diff_temp = abs(temperature - temperature_max) / abs(temperature_max)
-		var diff_fluid = abs(fluid - 100) / abs(100)
+		var diff_temp: float = abs(temperature - temperature_max) / abs(temperature_max)
+		var diff_fluid: float = abs(fluid - 100.0) / 100.0
+		
 		if syringe_rand <= syring_prob + (2 * syringe):
 			AllSignals.emit_signal("internal_bleeding", true)
+		
 		if diff_temp > 0.1:
 			type = ExamineType.type.Temperature_lack
-		if diff_fluid > 0.2:
+		elif diff_fluid > 0.2:
 			type = ExamineType.type.Fluid_lack
 		else:
 			type = ExamineType.type.Nothing
-	
 	
 	AllSignals.emit_signal("examine", type)
 

@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://lw7sway85qxu" path="res://nodes/interactable/fluid_pump.tscn" id="12_dinhu"]
 [ext_resource type="Script" uid="uid://cxk62iy2u0kni" path="res://scripts/light/l_behaviour.gd" id="13_kvuet"]
 [ext_resource type="Script" uid="uid://r3vrl6kk86ig" path="res://scripts/sound/s_behaviour.gd" id="17_rysoc"]
+[ext_resource type="PackedScene" uid="uid://ddhu7ajn1ya03" path="res://nodes/game_menu/game_menu.tscn" id="18_ssvqc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8cj0n"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -141,3 +142,5 @@ omni_range = 4096.0
 script = ExtResource("17_rysoc")
 power_off_sound = NodePath("../Player/NormalSound")
 alarm_sound = NodePath("../Player/AlarmSound")
+
+[node name="GameMenu" parent="." unique_id=2009856047 instance=ExtResource("18_ssvqc")]

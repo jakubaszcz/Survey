@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://ddhu7ajn1ya03"]
+
+[ext_resource type="Script" uid="uid://c0xxcrdr6hocu" path="res://scripts/game_menu/gm_behaviour.gd" id="1_5hupb"]
+
+[node name="GameMenu" type="Control" unique_id=2009856047]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5hupb")
+
+[node name="Menu" type="Control" parent="." unique_id=47586805]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -241.0
+offset_top = -257.0
+offset_right = 241.0
+offset_bottom = 257.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOver" type="Control" parent="." unique_id=896290079]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -241.0
+offset_top = -257.0
+offset_right = 241.0
+offset_bottom = 257.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GameOver" unique_id=2042512817]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(1.2836349, 1.1664598)
+theme_override_font_sizes/font_size = 64
+text = "Win or lose ?"
+
+[node name="Node" type="Control" parent="." unique_id=533378447]
+anchors_preset = 0
+
+[node name="Play" type="Button" parent="Node" unique_id=1070940702]
+layout_mode = 0
+offset_left = 493.0
+offset_top = 226.0
+offset_right = 712.0
+offset_bottom = 289.0
+text = "Menu"
+
+[node name="Exit" type="Button" parent="Node" unique_id=999929417]
+layout_mode = 0
+offset_left = 493.0
+offset_top = 325.0
+offset_right = 712.0
+offset_bottom = 388.0
+text = "Exit"
+
+[connection signal="pressed" from="Node/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Node/Exit" to="." method="_on_exit_pressed"]

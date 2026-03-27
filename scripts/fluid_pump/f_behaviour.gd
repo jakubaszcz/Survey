@@ -27,8 +27,12 @@ func _on_action_error() -> void:
 func _on_generator_state(state: bool) -> void:
 	has_power = not state
 
+func _on_release() -> void:
+	AllSignals.emit_signal("cooling_end")
+
 func _on_interact(delta) -> void:
 	if not has_power: return
+	AllSignals.emit_signal("cooling_start")
 	interacting = true
 	interact_time += delta
 	if interact_time >= max_interact_time:

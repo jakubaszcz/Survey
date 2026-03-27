@@ -26,8 +26,12 @@ func _on_action_error() -> void:
 func _on_action_success() -> void:
 	success_sound.play()
 
+func _on_release() -> void:
+	AllSignals.emit_signal("heat_end")
+
 func _on_interact(delta) -> void:
 	if not has_power: return
+	AllSignals.emit_signal("heat_start")
 	interact_time += delta
 	if interact_time >= max_interact_time:
 		interact_time = 0.0

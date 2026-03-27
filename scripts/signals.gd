@@ -12,3 +12,7 @@ signal timer(time : int)
 signal action_error()
 signal action_success()
 signal game_over(type: GameOverType.Type)
+signal heat_start
+signal heat_end
+signal cooling_start
+signal cooling_end

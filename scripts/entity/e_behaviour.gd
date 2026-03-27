@@ -53,6 +53,9 @@ var malus_time : float = 1.5
 var malus_temperature : float = 0.8
 var malus_fluid : int = 1
 
+@onready var being_heated : bool = false
+@onready var being_cooled : bool = false
+
 func _ready() -> void:
 	add_to_group("entity")
 	AllSignals.jumpscare.connect(_on_jumpscare_signal)
@@ -61,6 +64,22 @@ func _ready() -> void:
 	AllSignals.rise_fluid.connect(_on_fluid)
 	AllSignals.internal_bleeding.connect(_on_internal_bleeding)
 	AllSignals.timer.connect(_on_time)
+	AllSignals.heat_start.connect(_on_heat_start)
+	AllSignals.heat_end.connect(_on_heat_end)
+	AllSignals.cooling_start.connect(_on_cooling_start)
+	AllSignals.cooling_end.connect(_on_cooling_end)
+
+func _on_cooling_start() -> void:
+	being_cooled = true
+
+func _on_cooling_end() -> void:
+	being_cooled = false
+
+func _on_heat_start() -> void:
+	being_heated = true
+
+func _on_heat_end() -> void:
+	being_heated = false
 
 func _on_time(time: int) -> void:
 	var hours : int = time / 60
@@ -172,6 +191,7 @@ func _on_interact() -> void:
 	AllSignals.emit_signal("examine", type)
 
 func _temperature(delta: float) -> void:
+	if being_heated: return
 	if temperature >= temperature_unfreeze:
 		if player:
 			print("Temperature unfreezed, the entity has been freed")
@@ -192,6 +212,7 @@ func _temperature(delta: float) -> void:
 		AllSignals.emit_signal("temperature", temperature)
 
 func _fluid(delta: float) -> void:
+	if being_cooled: return
 	fluid_timer += delta
 	
 	var time: float = internal_bleeding_fluid_time if is_internal_bleeding else fluid_time

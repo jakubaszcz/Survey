@@ -31,6 +31,9 @@ func _on_interact(delta) -> void:
 			interact_time = 0.0
 			AllSignals.emit_signal("generator_state", false)
 
+func _on_release() -> void:
+	pass
+
 func _physics_process(delta) -> void:
 	if not interacting:
 		interact_time = 0.0

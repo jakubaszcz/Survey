@@ -51,6 +51,8 @@ func _physics_process(delta) -> void:
 		if hit.is_in_group("interactable"):
 			if Input.is_action_pressed("interact") and not jumpscare:
 				hit._on_interact(delta)
+			if Input.is_action_just_released("interact") and not jumpscare:
+				hit._on_release()
 		if hit is Item:
 			if Input.is_action_pressed("interact") and not jumpscare:
 				if hand_item:

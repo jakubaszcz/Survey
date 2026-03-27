@@ -7,8 +7,14 @@ var max_time: int = 360
 var game_over: bool = false
 var game_type: GameType.Type = GameType.Type.Tutorial
 
+@onready var world_environment: WorldEnvironment = $WorldEnvironment
+
 func _ready() -> void:
 	AllSignals.game_over.connect(_on_game_over)
+	AllSignals.end_tutorial.connect(_on_end_tutorial)
+
+func _on_end_tutorial() -> void:
+	world_environment.environment.volumetric_fog_enabled = true
 
 func _on_game_over(type: GameOverType.Type) -> void:
 	print("Game Over")

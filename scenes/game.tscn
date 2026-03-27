@@ -18,9 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://lw7sway85qxu" path="res://nodes/interactable/fluid_pump.tscn" id="12_dinhu"]
 [ext_resource type="Script" uid="uid://cxk62iy2u0kni" path="res://scripts/light/l_behaviour.gd" id="13_kvuet"]
 [ext_resource type="Script" uid="uid://r3vrl6kk86ig" path="res://scripts/sound/s_behaviour.gd" id="17_rysoc"]
+[ext_resource type="AudioStream" uid="uid://dqpwj15y3or4i" path="res://assets/freesound_community-lights-flicker-on-and-some-electrical-noises-33079.mp3" id="18_bhx41"]
 [ext_resource type="PackedScene" uid="uid://ddhu7ajn1ya03" path="res://nodes/game_menu/game_menu.tscn" id="18_ssvqc"]
 [ext_resource type="PackedScene" uid="uid://bsjjpmwvhknei" path="res://nodes/lab_desk/lab_desk.tscn" id="19_1kice"]
 [ext_resource type="PackedScene" uid="uid://blmvirkp44i5f" path="res://nodes/lab_shelf/lab_shelf.tscn" id="19_264po"]
+[ext_resource type="AudioStream" uid="uid://dt64e4pxbgbhc" path="res://assets/freesound_community-lightbulb-shattering_1-2-89954.mp3" id="19_qnb83"]
 [ext_resource type="PackedScene" uid="uid://bxoybc4ahgdf8" path="res://assets/tung_tung_tung_sahur.glb" id="20_1kice"]
 [ext_resource type="PackedScene" uid="uid://bjnur68nhl762" path="res://nodes/lab_chair/lab_chair.tscn" id="23_pl11u"]
 [ext_resource type="Script" uid="uid://ci0k8w5fx0yiy" path="res://scripts/class/tutorial/dialogue.gd" id="24_pl11u"]
@@ -36,12 +38,11 @@ sky_material = SubResource("ProceduralSkyMaterial_8cj0n")
 [sub_resource type="Environment" id="Environment_yqjtg"]
 background_mode = 1
 sky = SubResource("Sky_uwrxv")
-ambient_light_color = Color(0.072842635, 0.072842635, 0.072842635, 1)
-ambient_light_energy = 0.1
 tonemap_mode = 2
 glow_enabled = true
 glow_intensity = 1.5
-volumetric_fog_density = 1.0
+fog_light_color = Color(0.07118326, 0.081665836, 0.09797717, 1)
+volumetric_fog_density = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhx41"]
 albedo_texture = ExtResource("5_bt5mj")
@@ -153,13 +154,23 @@ use_collision = true
 size = Vector3(30, 1, 30)
 material = SubResource("StandardMaterial3D_qouja")
 
-[node name="Node3D" type="Node3D" parent="." unique_id=705699592 node_paths=PackedStringArray("light_1", "light_2", "light_3", "light_4", "light_5")]
+[node name="Node3D" type="Node3D" parent="." unique_id=705699592 node_paths=PackedStringArray("light_1", "light_2", "light_3", "light_4", "light_5", "sound_flicker_light_1", "sound_flicker_light_2", "sound_flicker_light_3", "sound_flicker_light_4", "sound_flicker_light_5", "sound_exploding_bulb_1", "sound_exploding_bulb_2", "sound_exploding_bulb_3", "sound_exploding_bulb_4", "sound_exploding_bulb_5")]
 script = ExtResource("13_kvuet")
 light_1 = NodePath("Light1")
 light_2 = NodePath("Light2")
 light_3 = NodePath("Light3")
 light_4 = NodePath("Light4")
 light_5 = NodePath("Light5")
+sound_flicker_light_1 = NodePath("Light1/Flicker")
+sound_flicker_light_2 = NodePath("Light2/Flicker")
+sound_flicker_light_3 = NodePath("Light3/Flicker")
+sound_flicker_light_4 = NodePath("Light4/Flicker")
+sound_flicker_light_5 = NodePath("Light5/Flicker")
+sound_exploding_bulb_1 = NodePath("Light1/Exploding")
+sound_exploding_bulb_2 = NodePath("Light2/Exploding")
+sound_exploding_bulb_3 = NodePath("Light3/Exploding")
+sound_exploding_bulb_4 = NodePath("Light4/Exploding")
+sound_exploding_bulb_5 = NodePath("Light5/Exploding")
 
 [node name="Light1" type="OmniLight3D" parent="Node3D" unique_id=1186925187]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.646742, 6, 3)
@@ -168,12 +179,24 @@ light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 omni_range = 4096.0
 
+[node name="Flicker" type="AudioStreamPlayer3D" parent="Node3D/Light1" unique_id=451046487]
+stream = ExtResource("18_bhx41")
+
+[node name="Exploding" type="AudioStreamPlayer3D" parent="Node3D/Light1" unique_id=2139381160]
+stream = ExtResource("19_qnb83")
+
 [node name="Light2" type="OmniLight3D" parent="Node3D" unique_id=261092675]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.474909, 6, 1.0264053)
 light_energy = 5.0
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 omni_range = 4096.0
+
+[node name="Flicker" type="AudioStreamPlayer3D" parent="Node3D/Light2" unique_id=440492103]
+stream = ExtResource("18_bhx41")
+
+[node name="Exploding" type="AudioStreamPlayer3D" parent="Node3D/Light2" unique_id=2142697718]
+stream = ExtResource("19_qnb83")
 
 [node name="Light3" type="OmniLight3D" parent="Node3D" unique_id=657610956]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.146423, 7.406538, -15.801771)
@@ -182,6 +205,12 @@ light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 omni_range = 4096.0
 
+[node name="Flicker" type="AudioStreamPlayer3D" parent="Node3D/Light3" unique_id=1416050679]
+stream = ExtResource("18_bhx41")
+
+[node name="Exploding" type="AudioStreamPlayer3D" parent="Node3D/Light3" unique_id=1733604741]
+stream = ExtResource("19_qnb83")
+
 [node name="Light4" type="OmniLight3D" parent="Node3D" unique_id=462036941]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.416316, 6.5317583, -18.163937)
 light_energy = 5.0
@@ -189,12 +218,24 @@ light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 omni_range = 4096.0
 
+[node name="Flicker" type="AudioStreamPlayer3D" parent="Node3D/Light4" unique_id=1089600796]
+stream = ExtResource("18_bhx41")
+
+[node name="Exploding" type="AudioStreamPlayer3D" parent="Node3D/Light4" unique_id=517132597]
+stream = ExtResource("19_qnb83")
+
 [node name="Light5" type="OmniLight3D" parent="Node3D" unique_id=173175623]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8381758, 7.119894, 6)
 light_energy = 5.0
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 omni_range = 4096.0
+
+[node name="Flicker" type="AudioStreamPlayer3D" parent="Node3D/Light5" unique_id=2037507033]
+stream = ExtResource("18_bhx41")
+
+[node name="Exploding" type="AudioStreamPlayer3D" parent="Node3D/Light5" unique_id=781719333]
+stream = ExtResource("19_qnb83")
 
 [node name="SoundManager" type="Node3D" parent="." unique_id=945648956 node_paths=PackedStringArray("power_off_sound", "alarm_sound")]
 script = ExtResource("17_rysoc")

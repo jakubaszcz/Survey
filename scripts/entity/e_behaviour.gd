@@ -58,6 +58,9 @@ var malus_fluid : int = 1
 
 @onready var game_type : GameType.Type = GameType.Type.Tutorial
 
+@onready var syringe_sound: AudioStreamPlayer3D = $Syringe
+@onready var pill: AudioStreamPlayer3D = $Pill
+
 func _ready() -> void:
 	add_to_group("entity")
 	AllSignals.jumpscare.connect(_on_jumpscare_signal)
@@ -147,6 +150,7 @@ func _on_jumpscare_signal(_player : Node3D) -> void:
 	is_game_over = true
 
 func _on_pill() -> void:
+	pill.play()
 	if is_internal_bleeding:
 		if game_type == GameType.Type.Tutorial:
 			AllSignals.emit_signal("step_complete", TutorialCondition.Condition.InternalBleeding)
@@ -174,6 +178,7 @@ func _malus(delta: float) -> void:
 @onready var has_been_examined_for_the_alarm : bool = false
 
 func _on_interact() -> void:
+	syringe_sound.play()
 	if game_type == GameType.Type.Tutorial:
 		if not has_been_examined_for_the_first_time:
 			AllSignals.emit_signal("step_complete", TutorialCondition.Condition.ExamineMonsterForTheFirstTime)

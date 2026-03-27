@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cmgu1mcpafk67" path="res://assets/entity/zoonomaly_monster_7_rig_2.png" id="4_hoixr"]
 [ext_resource type="AudioStream" uid="uid://bhreao3o56hd4" path="res://mrlockjaw-jumpscare-2-206591.mp3" id="6_hoixr"]
 [ext_resource type="Script" uid="uid://cea04dlyd4d3r" path="res://scripts/entity/e_sound.gd" id="7_qjnfs"]
+[ext_resource type="AudioStream" uid="uid://d685i62qcply" path="res://assets/u_xjrmmgxfru-axe-hit-flesh-02-266299.mp3" id="8_ckao8"]
+[ext_resource type="AudioStream" uid="uid://dirw1clmd28dm" path="res://assets/freesound_community-pill-shake-103778.mp3" id="9_2jlu7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8fun8"]
 size = Vector3(3.93647, 4.067932, 4.361389)
@@ -2375,3 +2377,9 @@ volume_db = -10.0
 [node name="Sound" type="Node3D" parent="." unique_id=344964734 node_paths=PackedStringArray("jumscare")]
 script = ExtResource("7_qjnfs")
 jumscare = NodePath("../monster/Jumpscare")
+
+[node name="Syringe" type="AudioStreamPlayer3D" parent="." unique_id=552314162]
+stream = ExtResource("8_ckao8")
+
+[node name="Pill" type="AudioStreamPlayer3D" parent="." unique_id=1003550287]
+stream = ExtResource("9_2jlu7")

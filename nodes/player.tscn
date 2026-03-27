@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bcw7bv3ptxd2j" path="res://scripts/player/p_movement.gd" id="1_u63mc"]
 [ext_resource type="Script" uid="uid://dcin8wg6xix66" path="res://scripts/player/p_head.gd" id="2_dcin8"]
 [ext_resource type="PackedScene" uid="uid://d0dgp65db21vv" path="res://nodes/interfaces/crosshair.tscn" id="3_me0cc"]
+[ext_resource type="AudioStream" uid="uid://ohobmcrpbxjn" path="res://assets/slow-creepy-footsteps-fx_124bpm_A_minor.mp3" id="4_hqdnm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qyyhd"]
 
@@ -38,3 +39,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4426241, 0.60281146, -0.982
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=2036108723]
 spot_range = 12.696939
 spot_angle = 45.53512
+
+[node name="Footstep" type="AudioStreamPlayer3D" parent="." unique_id=2036674801]
+stream = ExtResource("4_hqdnm")
+volume_db = -25.0

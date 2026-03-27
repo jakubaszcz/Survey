@@ -15,3 +15,8 @@ shape = SubResource("BoxShape3D_oe4v6")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=111424568]
 material = SubResource("StandardMaterial3D_d5xgn")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1498092126]
+light_color = Color(0.47058824, 0.23921569, 1, 1)
+light_energy = 10.0
+omni_range = 6.0082574

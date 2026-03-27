@@ -16,3 +16,4 @@ signal heat_start
 signal heat_end
 signal cooling_start
 signal cooling_end
+signal end_tutorial

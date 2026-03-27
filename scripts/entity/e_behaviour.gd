@@ -56,6 +56,8 @@ var malus_fluid : int = 1
 @onready var being_heated : bool = false
 @onready var being_cooled : bool = false
 
+@onready var game_type : GameType.Type = GameType.Type.Tutorial
+
 func _ready() -> void:
 	add_to_group("entity")
 	AllSignals.jumpscare.connect(_on_jumpscare_signal)
@@ -68,6 +70,11 @@ func _ready() -> void:
 	AllSignals.heat_end.connect(_on_heat_end)
 	AllSignals.cooling_start.connect(_on_cooling_start)
 	AllSignals.cooling_end.connect(_on_cooling_end)
+	AllSignals.end_tutorial.connect(_on_end_tutorial)
+
+
+func _on_end_tutorial() -> void:
+	game_type = GameType.Type.Game
 
 func _on_cooling_start() -> void:
 	being_cooled = true
@@ -138,10 +145,6 @@ func _on_shutdown(state: bool) -> void:
 
 func _on_jumpscare_signal(_player : Node3D) -> void:
 	is_game_over = true
-
-func _idle() -> void:
-	if animation.is_playing(): return
-	animation.play("idle")
 
 func _on_pill() -> void:
 	if is_internal_bleeding: 
@@ -222,20 +225,18 @@ func _fluid(delta: float) -> void:
 		fluid -= fluid_delta
 		AllSignals.emit_signal("fluid", fluid)
 
-func _process(delta: float) -> void:
+func _game(delta: float) -> void:
 	if is_game_over: print("Game Over"); return
-	
-	_idle()
 	
 	_temperature(delta)
 	_fluid(delta)
 	
 	if has_malus:
 		_malus(delta)
+
+func _process(delta: float) -> void:
+	
+	if game_type == GameType.Type.Game: _game(delta)
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	
-	move_and_slide()
-	
-	print ("Temperature: " + str(temperature) + "\nFluid: " + str(fluid) + "\nSyringe: " + str(syringe) + "\n")

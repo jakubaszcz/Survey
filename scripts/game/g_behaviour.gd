@@ -5,6 +5,7 @@ var elapsed_time: int = 0
 var max_time: int = 360
 
 var game_over: bool = false
+var game_type: GameType.Type = GameType.Type.Tutorial
 
 func _ready() -> void:
 	AllSignals.game_over.connect(_on_game_over)
@@ -13,7 +14,7 @@ func _on_game_over(type: GameOverType.Type) -> void:
 	print("Game Over")
 	game_over = true
 
-func _process(delta: float) -> void:
+func _game(delta: float) -> void:
 	if game_over:
 		return
 
@@ -28,3 +29,7 @@ func _process(delta: float) -> void:
 			game_over = true
 			AllSignals.game_over.emit(GameOverType.Type.Win)
 			return
+
+
+func _process(delta: float) -> void:
+	if game_type == GameType.Type.Game: _game(delta)

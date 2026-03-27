@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://cuwahm6rxvtum" path="res://nodes/entity.tscn" id="2_yqjtg"]
 [ext_resource type="AudioStream" uid="uid://c5ncpuucg04vo" path="res://freesound_community-sci-fi-facility-alarm-loop-96113.mp3" id="3_ir15t"]
 [ext_resource type="PackedScene" uid="uid://dhep7u4lpap7o" path="res://nodes/interactable/generator.tscn" id="4_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://dx3cehu5n6ttl" path="res://nodes/lab_chair/scratched-up-steel_albedo.png" id="5_bt5mj"]
 [ext_resource type="PackedScene" uid="uid://dosqj4ibc3gi8" path="res://nodes/furniture/table/table.tscn" id="5_iywne"]
-[ext_resource type="PackedScene" uid="uid://dp3q3e28dq6cu" path="res://nodes/furniture/table/panel.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://c43gf6bi3dyvv" path="res://nodes/item/syringe.tscn" id="8_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://nmlipalq4gkp" path="res://nodes/lab_chair/speckled_countertop1_ao.png" id="8_e1j6l"]
 [ext_resource type="PackedScene" uid="uid://xhb1ytref4gj" path="res://nodes/furniture/table/serynge_table.tscn" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://beojl2xerh1v2" path="res://nodes/examine_light/examine_light.tscn" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://dhc3gckqdh73e" path="res://nodes/temp_button_holder/temp_button_holder.tscn" id="9_vtaks"]
@@ -18,6 +19,12 @@
 [ext_resource type="Script" uid="uid://cxk62iy2u0kni" path="res://scripts/light/l_behaviour.gd" id="13_kvuet"]
 [ext_resource type="Script" uid="uid://r3vrl6kk86ig" path="res://scripts/sound/s_behaviour.gd" id="17_rysoc"]
 [ext_resource type="PackedScene" uid="uid://ddhu7ajn1ya03" path="res://nodes/game_menu/game_menu.tscn" id="18_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://bsjjpmwvhknei" path="res://nodes/lab_desk/lab_desk.tscn" id="19_1kice"]
+[ext_resource type="PackedScene" uid="uid://blmvirkp44i5f" path="res://nodes/lab_shelf/lab_shelf.tscn" id="19_264po"]
+[ext_resource type="PackedScene" uid="uid://bxoybc4ahgdf8" path="res://assets/tung_tung_tung_sahur.glb" id="20_1kice"]
+[ext_resource type="PackedScene" uid="uid://bjnur68nhl762" path="res://nodes/lab_chair/lab_chair.tscn" id="23_pl11u"]
+[ext_resource type="Script" uid="uid://bf8f7fckkbmhk" path="res://scripts/tutorial/t_behaviour.gd" id="24_e1j6l"]
+[ext_resource type="PackedScene" uid="uid://6p5fuk84xgs4" path="res://nodes/button/tutorial_button/tutorial_button.tscn" id="25_pl11u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8cj0n"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -36,6 +43,30 @@ glow_enabled = true
 glow_intensity = 1.5
 volumetric_fog_density = 1.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhx41"]
+albedo_texture = ExtResource("5_bt5mj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qnb83"]
+albedo_texture = ExtResource("8_e1j6l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sww3w"]
+albedo_texture = ExtResource("8_e1j6l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_suyxu"]
+albedo_texture = ExtResource("8_e1j6l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgl2t"]
+albedo_texture = ExtResource("8_e1j6l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qouja"]
+albedo_texture = ExtResource("8_e1j6l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wljb1"]
+albedo_texture = ExtResource("8_e1j6l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2yb1"]
+albedo_texture = ExtResource("8_e1j6l")
+
 [node name="Game" type="Node3D" unique_id=61270930]
 script = ExtResource("1_rysoc")
 
@@ -47,7 +78,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Player" parent="." unique_id=913938230 node_paths=PackedStringArray("monster") instance=ExtResource("1_uwrxv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5166101, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.247733, 3)
 monster = NodePath("../Entity")
 
 [node name="NormalSound" type="AudioStreamPlayer3D" parent="Player" unique_id=1826307150]
@@ -60,6 +91,7 @@ stream = ExtResource("3_ir15t")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.0898438)
 use_collision = true
 size = Vector3(30, 1, 30)
+material = SubResource("StandardMaterial3D_bhx41")
 
 [node name="Entity" parent="." unique_id=800150846 node_paths=PackedStringArray("player") instance=ExtResource("2_yqjtg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -17.310925)
@@ -72,44 +104,45 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9813833, 1.5766364, -18.555
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4569702, 0.6234741, 9.921318)
 use_collision = true
 size = Vector3(30.91394, 16.246948, 1)
+material = SubResource("StandardMaterial3D_qnb83")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=28324471]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.508814, 0.62249756, -5.047764)
 use_collision = true
 size = Vector3(30, 16.244995, 1)
+material = SubResource("StandardMaterial3D_sww3w")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=341340553]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3611803, 0.61950684, -20.101904)
 use_collision = true
 size = Vector3(30, 16.239014, 1)
+material = SubResource("StandardMaterial3D_suyxu")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=412598943]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.882071, 0.61676025, -4.8693957)
 use_collision = true
 size = Vector3(30, 16.23352, 1)
+material = SubResource("StandardMaterial3D_sgl2t")
 
 [node name="Table" parent="." unique_id=115595550 instance=ExtResource("5_iywne")]
 transform = Transform3D(0.26, 0, 0, 0, 0.26, 0, 0, 0, 0.26, 12.16166, 0.49999952, -19.007175)
 
-[node name="Panel" parent="." unique_id=182536341 instance=ExtResource("6_p57ef")]
-transform = Transform3D(2.4, 0, 0, 0, 2.4, 0, 0, 0, 2.4, -1.2693329, 1.3520417, -0.76854706)
-
 [node name="SeryngeTable" parent="." unique_id=1358597636 instance=ExtResource("8_gee14")]
-transform = Transform3D(2.3849761e-08, 0, -2, 0, 2, 0, 2, 0, 2.3849761e-08, -11.90654, 0.59527636, 7.6335287)
+transform = Transform3D(1.999661, 0, 0.0368244, 0, 2, 0, -0.0368244, 0, 1.999661, -1.4568224, 0.59527636, 6.97201)
 
 [node name="Syringe" parent="." unique_id=1032968558 instance=ExtResource("8_0tnpc")]
-transform = Transform3D(0.6178184, -0.78535026, 0.039055802, 0, 0.049669042, 0.9987657, -0.7863208, -0.61705583, 0.03068645, -13.267375, 2.5316901, -1.4913855)
+transform = Transform3D(-0.79756296, -0.6024913, 0.02996215, 0, 0.04966905, 0.9987658, -0.6032359, 0.7965785, -0.03961419, -10.555134, 2.5316901, 8.500625)
 
 [node name="ExamineLight" parent="." unique_id=422393135 instance=ExtResource("9_0tnpc")]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -12.93308, 2.96222, -2.868721)
+transform = Transform3D(-0.011047313, 0, 0.5998983, 0, 0.59999996, 0, -0.5998983, 0, -0.011047313, -11.938391, 2.96222, 8.07404)
 
 [node name="TempButtonHolder" parent="." unique_id=200164149 instance=ExtResource("9_vtaks")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7183268, 1, -12.288533)
+transform = Transform3D(-0.01841219, 0, 0.9998305, 0, 1, 0, -0.9998305, 0, -0.01841219, -21.663195, 1, -8.283399)
 
 [node name="Interface" parent="." unique_id=396093611 instance=ExtResource("10_vtaks")]
 
 [node name="Pill" parent="." unique_id=897470479 instance=ExtResource("11_kvpfn")]
-transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, -13.255617, 2.490158, 1.3745182)
+transform = Transform3D(-9.2060945e-05, 0, 0.0049991524, 0, 0.005, 0, -0.0049991524, 0, -9.2060945e-05, -7.689933, 2.490158, 8.436101)
 
 [node name="FluidPump" parent="." unique_id=469560699 instance=ExtResource("12_dinhu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.307721, 0.5000005, 0.8173281)
@@ -118,22 +151,47 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.307721, 0.5000005, 0.81732
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80916214, 8.220747, -5.2371855)
 use_collision = true
 size = Vector3(30, 1, 30)
+material = SubResource("StandardMaterial3D_qouja")
 
-[node name="Node3D" type="Node3D" parent="." unique_id=705699592 node_paths=PackedStringArray("light_1", "light_2")]
+[node name="Node3D" type="Node3D" parent="." unique_id=705699592 node_paths=PackedStringArray("light_1", "light_2", "light_3", "light_4", "light_5")]
 script = ExtResource("13_kvuet")
 light_1 = NodePath("Light1")
 light_2 = NodePath("Light2")
+light_3 = NodePath("Light3")
+light_4 = NodePath("Light4")
+light_5 = NodePath("Light5")
 
 [node name="Light1" type="OmniLight3D" parent="Node3D" unique_id=1186925187]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 3)
-light_energy = 10.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.646742, 6, 3)
+light_energy = 5.0
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 omni_range = 4096.0
 
 [node name="Light2" type="OmniLight3D" parent="Node3D" unique_id=261092675]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.864, 6, -11.971396)
-light_energy = 10.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.474909, 6, 1.0264053)
+light_energy = 5.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+omni_range = 4096.0
+
+[node name="Light3" type="OmniLight3D" parent="Node3D" unique_id=657610956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.146423, 7.406538, -15.801771)
+light_energy = 5.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+omni_range = 4096.0
+
+[node name="Light4" type="OmniLight3D" parent="Node3D" unique_id=462036941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.416316, 6.5317583, -18.163937)
+light_energy = 5.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+omni_range = 4096.0
+
+[node name="Light5" type="OmniLight3D" parent="Node3D" unique_id=173175623]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8381758, 7.119894, 6)
+light_energy = 5.0
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 omni_range = 4096.0
@@ -144,3 +202,38 @@ power_off_sound = NodePath("../Player/NormalSound")
 alarm_sound = NodePath("../Player/AlarmSound")
 
 [node name="GameMenu" parent="." unique_id=2009856047 instance=ExtResource("18_ssvqc")]
+
+[node name="LabShelf" parent="." unique_id=84412492 instance=ExtResource("19_264po")]
+transform = Transform3D(-2.2, 0, -1.923301e-07, 0, 2.2, 0, 1.923301e-07, 0, -2.2, -13.138468, 0.5000001, 4.405673)
+
+[node name="LabDesk" parent="." unique_id=1067105584 instance=ExtResource("19_1kice")]
+transform = Transform3D(-5, 0, -7.54979e-07, 0, 5, 0, 7.54979e-07, 0, -5, 8.64787, 0.503539, 6.1978397)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="." unique_id=1078689980]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.568604, 4.100832, 2.964147)
+size = Vector3(0.47607422, 7.149414, 5.3792114)
+material = SubResource("StandardMaterial3D_wljb1")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="." unique_id=1523448966]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.681506, 3.7360702, 5.0917845)
+use_collision = true
+size = Vector3(0.47607422, 7.149414, 8.896484)
+material = SubResource("StandardMaterial3D_v2yb1")
+
+[node name="Sketchfab_Scene" parent="." unique_id=398682478 instance=ExtResource("20_1kice")]
+transform = Transform3D(0.08064137, 0, -0.059135187, 0, 0.1, 0, 0.059135187, 0, 0.08064137, 14.140504, 2.8540902, -18.813587)
+
+[node name="LabChair" parent="." unique_id=247068317 instance=ExtResource("23_pl11u")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -3.5849276, 1.7335904, -7.2310667)
+
+[node name="LabChair2" parent="." unique_id=1751639235 instance=ExtResource("23_pl11u")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -8.668114, 1.6228073, 5.7392197)
+
+[node name="TempButtonHolder2" parent="." unique_id=1719038937 instance=ExtResource("9_vtaks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.696238, 1, 8.52782)
+
+[node name="TutorialStep" type="Node3D" parent="." unique_id=73351694]
+script = ExtResource("24_e1j6l")
+
+[node name="TutorialButton" parent="." unique_id=33269994 instance=ExtResource("25_pl11u")]
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 1.0837376, 2.2428405, 9.226984)

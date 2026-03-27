@@ -17,7 +17,9 @@ enum States {
 	UNACTIVE
 }
 
-var state : States = States.ACTIVE
+@onready var state : States = States.ACTIVE
+
+@onready var game_type : GameType.Type = GameType.Type.Tutorial
 
 func _ready() -> void:
 	add_to_group("interactable")
@@ -34,7 +36,7 @@ func _on_interact(delta) -> void:
 func _on_release() -> void:
 	pass
 
-func _physics_process(delta) -> void:
+func _game(delta: float) -> void:
 	if not interacting:
 		interact_time = 0.0
 	interacting = false
@@ -52,4 +54,6 @@ func _physics_process(delta) -> void:
 			gen_sound.stop()
 			state = States.UNACTIVE
 			AllSignals.emit_signal("generator_state", true)
-			
+
+func _physics_process(delta) -> void:
+	if game_type == GameType.Type.Game: _game(delta) 

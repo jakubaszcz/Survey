@@ -22,3 +22,42 @@ theme_override_colors/font_shadow_color = Color(1, 1, 1, 0)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 26
 text = "0AM"
+
+[node name="Tutorial" type="Control" parent="." unique_id=208240146]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Skip" type="Label" parent="Tutorial" unique_id=1311844438]
+layout_mode = 0
+offset_left = -269.0
+offset_top = 11.0
+offset_right = 31.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Hold the orange button to skip tutorial"
+
+[node name="Control" type="Control" parent="Tutorial" unique_id=620385275]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Dialogue" type="Label" parent="Tutorial/Control" unique_id=389804011]
+layout_mode = 0
+offset_left = -575.0
+offset_top = 606.0
+offset_right = -494.0
+offset_bottom = 629.0
+text = "dsfdfdfdfd"

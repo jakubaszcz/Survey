@@ -6,9 +6,15 @@ extends Node
 
 @onready var tutorial: Control = $Tutorial
 
+@onready var dialogue: Label = $Control/Dialogue
+
 func _ready() -> void:
 	AllSignals.timer.connect(_on_timer)
 	AllSignals.end_tutorial.connect(_on_end_tutorial)
+	AllSignals.send_dialogue.connect(_on_send_dialogue)
+
+func _on_send_dialogue(value: String) -> void:
+	dialogue.text = value
 
 func _on_end_tutorial() -> void:
 	tutorial.visible = false

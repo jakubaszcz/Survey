@@ -147,7 +147,9 @@ func _on_jumpscare_signal(_player : Node3D) -> void:
 	is_game_over = true
 
 func _on_pill() -> void:
-	if is_internal_bleeding: 
+	if is_internal_bleeding:
+		if game_type == GameType.Type.Tutorial:
+			AllSignals.emit_signal("step_complete", TutorialCondition.Condition.InternalBleeding)
 		AllSignals.emit_signal("internal_bleeding", false)
 	else:
 		has_malus = true
@@ -168,7 +170,21 @@ func _malus(delta: float) -> void:
 		temperature += malus_temperature
 		fluid -= malus_fluid
 
+@onready var has_been_examined_for_the_first_time : bool = false
+@onready var has_been_examined_for_the_alarm : bool = false
+
 func _on_interact() -> void:
+	if game_type == GameType.Type.Tutorial:
+		if not has_been_examined_for_the_first_time:
+			AllSignals.emit_signal("step_complete", TutorialCondition.Condition.ExamineMonsterForTheFirstTime)
+			has_been_examined_for_the_first_time = true
+		elif not has_been_examined_for_the_alarm:
+			AllSignals.emit_signal("step_complete", TutorialCondition.Condition.ExamineMonsteForAlarm)
+			AllSignals.emit_signal("internal_bleeding", true)
+			has_been_examined_for_the_alarm = true
+			
+		AllSignals.emit_signal("examine", ExamineType.type.Nothing)
+		return
 	syringe += 1
 	
 	var syringe_rand: int = randi_range(syringe_min, syringe_max)

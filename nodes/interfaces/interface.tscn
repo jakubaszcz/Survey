@@ -41,23 +41,24 @@ offset_bottom = 34.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Hold the orange button to skip tutorial"
 
-[node name="Control" type="Control" parent="Tutorial" unique_id=620385275]
+[node name="Control" type="Control" parent="." unique_id=620385275]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
+offset_left = 536.0
+offset_top = -648.0
+offset_right = 576.0
+offset_bottom = -608.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Dialogue" type="Label" parent="Tutorial/Control" unique_id=389804011]
+[node name="Dialogue" type="Label" parent="Control" unique_id=389804011]
 layout_mode = 0
-offset_left = -575.0
+offset_left = -1101.0
 offset_top = 606.0
-offset_right = -494.0
+offset_right = 18.0
 offset_bottom = 629.0
 text = "dsfdfdfdfd"

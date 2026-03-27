@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://blmvirkp44i5f" path="res://nodes/lab_shelf/lab_shelf.tscn" id="19_264po"]
 [ext_resource type="PackedScene" uid="uid://bxoybc4ahgdf8" path="res://assets/tung_tung_tung_sahur.glb" id="20_1kice"]
 [ext_resource type="PackedScene" uid="uid://bjnur68nhl762" path="res://nodes/lab_chair/lab_chair.tscn" id="23_pl11u"]
-[ext_resource type="Script" uid="uid://bf8f7fckkbmhk" path="res://scripts/tutorial/t_behaviour.gd" id="24_e1j6l"]
+[ext_resource type="Script" uid="uid://ci0k8w5fx0yiy" path="res://scripts/class/tutorial/dialogue.gd" id="24_pl11u"]
 [ext_resource type="PackedScene" uid="uid://6p5fuk84xgs4" path="res://nodes/button/tutorial_button/tutorial_button.tscn" id="25_pl11u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8cj0n"]
@@ -233,7 +233,7 @@ transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -8.668114, 1.6228073, 5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.696238, 1, 8.52782)
 
 [node name="TutorialStep" type="Node3D" parent="." unique_id=73351694]
-script = ExtResource("24_e1j6l")
+script = ExtResource("24_pl11u")
 
 [node name="TutorialButton" parent="." unique_id=33269994 instance=ExtResource("25_pl11u")]
 transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 1.0837376, 2.2428405, 9.226984)

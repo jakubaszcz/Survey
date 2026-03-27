@@ -23,6 +23,7 @@ ExamineType="*uid://uuo1aq705a37"
 GameOverType="*uid://cxp3ul2o5bhl3"
 TemperatureState="*uid://b2e53iqcjfwxh"
 GameType="*uid://k5jt0fprjoga"
+TutorialCondition="*uid://ba0yalvv05lqm"
 
 [display]
 

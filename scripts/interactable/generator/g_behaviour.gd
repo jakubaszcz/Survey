@@ -23,8 +23,21 @@ enum States {
 
 func _ready() -> void:
 	add_to_group("interactable")
+	AllSignals.end_tutorial.connect(_on_end_tutorial)
+
+func _on_end_tutorial() -> void:
+	game_type = GameType.Type.Game
 
 func _on_interact(delta) -> void:
+
+	if game_type == GameType.Type.Tutorial:
+		interact_time += delta
+		if interact_time >= max_interact_time:
+			AllSignals.emit_signal("step_complete", TutorialCondition.Condition.PowerBack)
+			AllSignals.emit_signal("generator_state", false)
+			interact_time = 0.0
+			return
+
 	interacting = true
 	if state == States.UNACTIVE:
 		interact_time += delta
@@ -55,5 +68,6 @@ func _game(delta: float) -> void:
 			state = States.UNACTIVE
 			AllSignals.emit_signal("generator_state", true)
 
+
 func _physics_process(delta) -> void:
-	if game_type == GameType.Type.Game: _game(delta) 
+	if game_type == GameType.Type.Game: _game(delta)

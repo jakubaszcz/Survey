@@ -15,7 +15,6 @@ func _on_release() -> void:
 	pass
 
 func _on_interact(delta) -> void:
-	AllSignals.emit_signal("heat_start")
 	interact_time += delta
 	if interact_time >= max_interact_time:
 		interact_time = 0.0

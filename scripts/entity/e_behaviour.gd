@@ -214,7 +214,27 @@ func _on_interact() -> void:
 	
 	AllSignals.emit_signal("examine", type)
 
+func _fluid(delta: float) -> void:
+	if being_cooled: return
+	fluid_timer += delta
+	
+	var time: float = internal_bleeding_fluid_time if is_internal_bleeding else fluid_time
+	
+	if fluid_timer >= time:
+		fluid_timer = 0.0
+		fluid -= fluid_delta
+		AllSignals.emit_signal("fluid", fluid)
+
+func _game(delta: float) -> void:
+	
+	_temperature(delta)
+	_fluid(delta)
+	
+	if has_malus:
+		_malus(delta)
+		
 func _temperature(delta: float) -> void:
+	print("being_heated: " + str(being_heated))
 	if being_heated: return
 	if temperature >= temperature_unfreeze:
 		if player:
@@ -234,26 +254,6 @@ func _temperature(delta: float) -> void:
 		temperature_timer = 0.0
 		
 		AllSignals.emit_signal("temperature", temperature)
-
-func _fluid(delta: float) -> void:
-	if being_cooled: return
-	fluid_timer += delta
-	
-	var time: float = internal_bleeding_fluid_time if is_internal_bleeding else fluid_time
-	
-	if fluid_timer >= time:
-		fluid_timer = 0.0
-		fluid -= fluid_delta
-		AllSignals.emit_signal("fluid", fluid)
-
-func _game(delta: float) -> void:
-	if is_game_over: print("Game Over"); return
-	
-	_temperature(delta)
-	_fluid(delta)
-	
-	if has_malus:
-		_malus(delta)
 
 func _process(delta: float) -> void:
 	

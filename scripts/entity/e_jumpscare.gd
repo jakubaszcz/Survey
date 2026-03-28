@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var animation : AnimationPlayer
-@export var distance : float = 3.8
+@export var distance : float = 4.6
 
 func _ready() -> void:
 	AllSignals.jumpscare.connect(_on_jumpscare)
@@ -9,17 +9,15 @@ func _ready() -> void:
 func _on_jumpscare(player : Node3D) -> void:
 	if not player:
 		return
-	var forward: Vector3 = -player.global_transform.basis.z
-	forward.y = 0
-	forward = forward.normalized()
-	forward.y -= 0.5
-	forward.z -= 0.6
-	global_transform.origin = player.global_transform.origin + forward * distance
+
+	var camera: Camera3D = player.get_viewport().get_camera_3d()
 	
-	var target_pos: Vector3 = player.global_transform.origin
-	target_pos.y = global_transform.origin.y
-	look_at(target_pos, Vector3.UP)
-	rotate_y(PI)
-	
+	var target = camera if camera else player
+
+	self.get_parent().remove_child(self)
+	target.add_child(self)
+
+	transform.origin = Vector3(0, -3.5, -distance) 
+
 	await get_tree().create_timer(1.0).timeout
 	AllSignals.emit_signal("game_over", GameOverType.Type.Lose)

@@ -16,12 +16,28 @@ var jumpscare : bool = false
 
 var indicate : bool = false
 
+var shake_intensity : float = 1
+var shake_tween : Tween
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	AllSignals.jumpscare.connect(_on_jumpscare)
 
-func _on_jumpscare(player : Node3D) -> void:
-	jumpscare = true
+func _on_jumpscare(_player : Node3D) -> void:
+	jumpscare = true # On bloque la rotation de la caméra comme prévu dans ton _input
+	
+	if shake_tween:
+		shake_tween.kill() # On arrête l'ancien tremblement s'il y en avait un
+	
+	shake_tween = create_tween()
+	for i in range(10):
+		var random_offset = Vector2(randf_range(-0.2, 0.2), randf_range(-0.2, 0.2))
+		shake_tween.tween_property(camera, "h_offset", random_offset.x, 0.05)
+		shake_tween.tween_property(camera, "v_offset", random_offset.y, 0.05)
+	
+	shake_tween.tween_property(camera, "h_offset", 0.0, 0.1)
+	shake_tween.tween_property(camera, "v_offset", 0.0, 0.1)
+	
 
 func _input(event) -> void:
 	_mouse_movement(event)

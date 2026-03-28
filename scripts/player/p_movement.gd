@@ -28,7 +28,7 @@ func _input(event) -> void:
 		if event.pressed:
 			if event.keycode == KEY_J:
 				print("You pressed J You dumbass")
-				AllSignals.emit_signal("jumpscare", self)
+				AllSignals.emit_signal("prepare_jumpscare", self)
 
 func _movement_process(delta) -> void:
 	var input: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")

@@ -251,6 +251,7 @@ func _temperature(delta: float) -> void:
 		var multiplier = lerp(2.0, 1.0, fluid_ratio)
 		
 		temperature += value * multiplier
+		temperature_timer = 0.0
 		
 		AllSignals.emit_signal("temperature", temperature)
 

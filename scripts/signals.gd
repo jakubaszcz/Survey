@@ -1,5 +1,6 @@
 extends Node
 
+signal prepare_jumpscare(player : Node3D)
 signal jumpscare(player : Node3D)
 signal temperature(temperature : float)
 signal fluid(fluid: float)

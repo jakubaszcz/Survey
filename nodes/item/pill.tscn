@@ -5,8 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://bbpbupob2basg" path="res://assets/floraphonic-paper-collect-9-186723.mp3" id="3_ixsn4"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5y2fj"]
-height = 106.30322
-radius = 22.551758
+height = 153.30804
+radius = 55.2583
 
 [node name="Pill" type="CharacterBody3D" unique_id=897470479 node_paths=PackedStringArray("grab_sound")]
 script = ExtResource("1_5y2fj")
@@ -16,7 +16,7 @@ grab_sound = NodePath("Grab")
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=938888440]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 52.15161, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 54.598785, 0)
 shape = SubResource("CylinderShape3D_5y2fj")
 
 [node name="Grab" type="AudioStreamPlayer3D" parent="." unique_id=1937036085]

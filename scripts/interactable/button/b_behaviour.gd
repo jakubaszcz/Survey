@@ -4,7 +4,7 @@ var interact_time : float = 0.0
 var max_interact_time : float = 0.5
 var interacting : bool = false
 
-var temperature : float = 0.8
+var temperature : float = 1.2
 
 @export var success_sound : AudioStreamPlayer3D
 @export var error_sound : AudioStreamPlayer3D

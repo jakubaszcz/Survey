@@ -7,6 +7,8 @@ extends Node3D
 
 @onready var spot_light_3d: SpotLight3D = $SpotLight3D
 
+@onready var jumpscare: AudioStreamPlayer3D = $"../Jumpscare"
+
 func _ready() -> void:
 	AllSignals.prepare_jumpscare.connect(_on_prepare_jumpscare)
 	AllSignals.jumpscare.connect(_on_jumpscare)
@@ -49,6 +51,9 @@ func _wait(time: float) -> void:
 func _on_jumpscare(player : Node3D) -> void:
 	if not player:
 		return
+	
+	jumpscare.play()
+		
 	get_parent().visible = true
 	spot_light_3d.visible = true
 

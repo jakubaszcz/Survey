@@ -3,8 +3,6 @@
 [ext_resource type="Script" uid="uid://cf5vpxp3es8sr" path="res://scripts/entity/e_behaviour.gd" id="1_k4hbg"]
 [ext_resource type="Script" uid="uid://b7xrvcq74a4a7" path="res://scripts/entity/e_jumpscare.gd" id="2_6ykkn"]
 [ext_resource type="Texture2D" uid="uid://bnro5ywvnrs77" path="res://assets/entity/zoonomaly_monster_7_rig_0.png" id="2_k4hbg"]
-[ext_resource type="Texture2D" uid="uid://cym2pq3nho261" path="res://assets/entity/zoonomaly_monster_7_rig_1.png" id="3_6ykkn"]
-[ext_resource type="Texture2D" uid="uid://cmgu1mcpafk67" path="res://assets/entity/zoonomaly_monster_7_rig_2.png" id="4_hoixr"]
 [ext_resource type="AudioStream" uid="uid://bhreao3o56hd4" path="res://mrlockjaw-jumpscare-2-206591.mp3" id="6_hoixr"]
 [ext_resource type="Script" uid="uid://cea04dlyd4d3r" path="res://scripts/entity/e_sound.gd" id="7_qjnfs"]
 [ext_resource type="AudioStream" uid="uid://d685i62qcply" path="res://assets/u_xjrmmgxfru-axe-hit-flesh-02-266299.mp3" id="8_ckao8"]
@@ -18,12 +16,9 @@ size = Vector3(3.93647, 4.067932, 4.361389)
 resource_name = "MONSTER07MAT"
 cull_mode = 2
 albedo_texture = ExtResource("2_k4hbg")
-metallic_texture = ExtResource("3_6ykkn")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("3_6ykkn")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("4_hoixr")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_krqxp"]
 resource_name = "Sketchfab_Scene_zoonamaly_monster7_Monster7_MONSTER07MAT_0"
@@ -144,6 +139,9 @@ bind/30/pose = Transform3D(100.00001, 0, 0, 0, 100.00001, 0, 0, 0, 100, 0, 0, 0)
 bind/31/name = &"camera_end_030"
 bind/31/bone = -1
 bind/31/pose = Transform3D(100.00001, 0, 0, 0, 100.00001, 0, 0, 0, 100, 0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckao8"]
+albedo_texture = ExtResource("2_k4hbg")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_08pk2"]
 resource_name = "Sketchfab_Scene_zoonamaly_monster7_body1_model0_MONSTER07MAT_0"
@@ -2354,6 +2352,7 @@ layers = 2
 mesh = SubResource("ArrayMesh_krqxp")
 skin = SubResource("Skin_iq51t")
 skeleton = NodePath("..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ckao8")
 
 [node name="Object_12" type="MeshInstance3D" parent="monster/Sketchfab_model/272b1aaaf83c41d99dcce6046d8d1fd5_fbx/Object_2/RootNode/zoonamaly_monster7_Monster7_skeleton/Object_7/Skeleton3D" unique_id=914775215]
 layers = 2
@@ -2370,17 +2369,12 @@ transform = Transform3D(100.00001, -6.6721845e-13, 4.0855345e-29, 0, 6.123234e-1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="monster" unique_id=71395785]
 libraries/ = SubResource("AnimationLibrary_p33du")
 
-[node name="Jumpscare" type="AudioStreamPlayer3D" parent="monster" unique_id=1767064227]
-transform = Transform3D(1.4285715, 0, 0, 0, 1.4285715, 0, 0, 0, 1.4285715, 0, 0, 0)
-stream = ExtResource("6_hoixr")
-volume_db = -80.0
-
 [node name="SpotLight3D" type="SpotLight3D" parent="monster" unique_id=1443438961]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4505644, 5.5312767)
 
-[node name="Sound" type="Node3D" parent="." unique_id=344964734 node_paths=PackedStringArray("jumscare")]
+[node name="Sound" type="Node3D" parent="." unique_id=344964734 node_paths=PackedStringArray("jumpscare")]
 script = ExtResource("7_qjnfs")
-jumscare = NodePath("../monster/Jumpscare")
+jumpscare = NodePath("../Jumpscare")
 
 [node name="Syringe" type="AudioStreamPlayer3D" parent="." unique_id=552314162]
 stream = ExtResource("8_ckao8")
@@ -2391,3 +2385,6 @@ stream = ExtResource("9_2jlu7")
 [node name="Disapear" type="AudioStreamPlayer3D" parent="." unique_id=252781527]
 stream = ExtResource("10_q1ner")
 volume_db = -20.0
+
+[node name="Jumpscare" type="AudioStreamPlayer3D" parent="." unique_id=1767064227]
+stream = ExtResource("6_hoixr")

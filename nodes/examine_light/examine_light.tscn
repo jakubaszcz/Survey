@@ -11,6 +11,7 @@ script = ExtResource("1_d5xgn")
 examine_light = SubResource("StandardMaterial3D_d5xgn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1515122513]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_oe4v6")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=111424568]

@@ -16,7 +16,7 @@ var jumpscare : bool = false
 
 var indicate : bool = false
 
-var shake_intensity : float = 1
+var shake_intensity : float = 0.3
 var shake_tween : Tween
 
 func _ready() -> void:
@@ -24,10 +24,10 @@ func _ready() -> void:
 	AllSignals.jumpscare.connect(_on_jumpscare)
 
 func _on_jumpscare(_player : Node3D) -> void:
-	jumpscare = true # On bloque la rotation de la caméra comme prévu dans ton _input
+	jumpscare = true
 	
 	if shake_tween:
-		shake_tween.kill() # On arrête l'ancien tremblement s'il y en avait un
+		shake_tween.kill() 
 	
 	shake_tween = create_tween()
 	for i in range(10):
@@ -53,36 +53,79 @@ func _mouse_movement(event):
 	else:
 		camera.rotation.x = deg_to_rad(0)
 
-func _physics_process(delta) -> void:
-	if ray and ray.is_colliding():
-		var hit: Object = ray.get_collider()
-		if hit.is_in_group("indicator"):
-			if not indicate:
-				var indcator : String = hit._on_indicate()
-				AllSignals.emit_signal("indicate", indcator)
-				indicate = true
-		else:
-			AllSignals.emit_signal("indicate", "")
-			indicate = false
-		if hit.is_in_group("entity"):
-			if Input.is_action_pressed("interact") and not jumpscare:
-				if hand_item_type == ItemType.type.Syringe:
-					hit._on_interact()
-					hand_item.queue_free()
-					hand_item_type = ItemType.type.Item
-				if hand_item_type == ItemType.type.Pill:
-					hit._on_pill()
-					hand_item.queue_free()
-					hand_item_type = ItemType.type.Item
-		if hit.is_in_group("interactable"):
-			if Input.is_action_pressed("interact") and not jumpscare:
-				hit._on_interact(delta)
-			if Input.is_action_just_released("interact") and not jumpscare:
-				hit._on_release()
-		if hit is Item:
-			if Input.is_action_pressed("interact") and not jumpscare:
-				if hand_item:
-					hand_item.queue_free()
-				hand_item = hit._hold(hand)
-				hand_item_type = hand_item.item_type
-			
+func _physics_process(delta: float) -> void:
+	if not ray or not ray.is_colliding():
+		_clear_indication()
+		indicate = false
+		return
+
+	var hit: Object = ray.get_collider()
+	var indication_text: String = ""
+
+	# Indicator
+	if hit.is_in_group("indicator"):
+		if not indicate:
+			indication_text = hit._on_indicate()
+			indicate = true
+	else:
+		indicate = false
+
+	if hit.is_in_group("entity"):
+		_handle_entity_interaction(hit)
+
+	elif hit.is_in_group("interactable"):
+		indication_text = "Hold E to Interact"
+		_handle_interactable_interaction(hit, delta)
+
+	# Item interaction
+	elif hit is Item:
+		indication_text = "Press E to Interact"
+		_handle_item_interaction(hit)
+
+	# Final indication update
+	AllSignals.emit_signal("indicate", indication_text)
+
+func _handle_entity_interaction(hit: Object) -> void:
+	if jumpscare:
+		return
+	
+	if not Input.is_action_just_pressed("interact"):
+		return
+
+	if hand_item_type == ItemType.type.Syringe:
+		hit._on_interact()
+		if hand_item:
+			hand_item.queue_free()
+		hand_item_type = ItemType.type.Item
+
+	elif hand_item_type == ItemType.type.Pill:
+		hit._on_pill()
+		if hand_item:
+			hand_item.queue_free()
+		hand_item_type = ItemType.type.Item
+
+func _handle_interactable_interaction(hit: Object, delta: float) -> void:
+	if jumpscare:
+		return
+
+	if Input.is_action_pressed("interact"):
+		hit._on_interact(delta)
+
+	if Input.is_action_just_released("interact"):
+		hit._on_release()
+
+func _handle_item_interaction(hit: Item) -> void:
+	if jumpscare:
+		return
+
+	if not Input.is_action_just_pressed("interact"):
+		return
+
+	if hand_item:
+		hand_item.queue_free()
+
+	hand_item = hit._hold(hand)
+	hand_item_type = hand_item.item_type
+
+func _clear_indication() -> void:
+	AllSignals.emit_signal("indicate", "")

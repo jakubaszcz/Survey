@@ -10,88 +10,100 @@ extends Node
 
 var dialogue : Array = [
 	{
-	"text" : "Hi doc, Here's your office, Your job here is to watch out for the monster, you don't want him to get to you. (Space to continue)",
+	"text" : "Hello you! The dev speaking! We just received a new creature from the lab. It needs to be examined, so we’ll need your help... (Space to continue)",
 	"condition" : TutorialCondition.Condition.None,
 	},
 	{
-	"text" : "Keep it cryo, you need to check it temperature and fluid, to do that let's grab a syringe first",
+	"text" : "Alright, let me explain what you need to do. Your job is to monitor the entity's temperature. As you can see, it’s cryogenized. Keep in mind, the temperature depends on the cryo-fluid... (Space to continue)",
+	"condition" : TutorialCondition.Condition.None,
+	},
+	{
+	"text" : "So, how do you check the temperature or the fluid? You’ll need a syringe. Go grab one, it should be on the desk outside the office!",
 	"condition" : TutorialCondition.Condition.DiscoverSyringe,
 	},
 	{
-	"text": "Nice ! Now, let's pay a visit to our big ahh monster, and interact on it with your syringe",
+	"text": "Nice! Now let’s examine the monster. With the syringe in your hand, interact with it. [\"Press E to interact with the monster\"]",
 	"condition": TutorialCondition.Condition.ExamineMonsterForTheFirstTime
 	},
 	{
-	"text": "All done, go back to the desk and let's see what happened (Space to continue)",
+	"text": "Good job! Now go back to the desk where you picked up the syringe... (Space to continue)",
 	"condition": TutorialCondition.Condition.None
 	},
 	{
-	"text": "As you can see, the cube turn yellow, it's a good sign, you can go back chillinfor a bit ! (Space to continue)",
+	"text": "You might have noticed a cube near the syringe spot... (Space to continue)",
 	"condition": TutorialCondition.Condition.None
 	},
 	{
-	"text": "If it's black, holy shit you have bad luck, test didn't get  successfull, you need to retry (Space to continue)",
+	"text": "When the cube turns yellow, it means something’s wrong. Temperature rising, or fluid running low. Either way, it’s a warning. (Space to continue)",
 	"condition": TutorialCondition.Condition.None
 	},
 	{
-	"text": "Mhh, yeah if it turn blue, you need to hold the red button in your office, and rise the temperature a bit, don't over heat, so dose it ! (Space to continue)",
+	"text": "But if it turns black, that means the test failed. You’ll need to retry until you get a different result... (Space to continue)",
 	"condition": TutorialCondition.Condition.None
 	},
 	{
-	"text": "Well, red is the same story, but you need to deal with the fluid pump near your office this time ! (Space to continue)",
+	"text": "If it turns blue, that’s where things start getting serious. It means the temperature is too low, and you’ll need to cool it down properly. I’ll show you how in a moment... (Space to continue)",
 	"condition": TutorialCondition.Condition.None
 	},
 	{
-	"text": "Ok, now i'll show you something important, get the syringe and go examine the monster !",
+	"text": "If it turns red, same idea, but this time it’s the fluid. You’ll need to refill it using the pump near your desk. (Space to continue)",
+	"condition": TutorialCondition.Condition.None
+	},
+	{
+	"text": "Now, something important. It’s better if I show you. Take the syringe again and examine the monster one more time. [\"Press E to interact\"]",
 	"condition": TutorialCondition.Condition.ExamineMonsteForAlarm
 	},
 	{
-	"text": "Sometimes the more you do exams on him, he can do aninternal bleedin ! (Space to continue)",
+	"text": "Hear that loud noise? That’s the alarm. It means the monster is suffering from internal bleeding. You’ll need a pill to stop it. (Space to continue)",
 	"condition": TutorialCondition.Condition.None
 	},
 	{
-	"text": "So, if that happend to you, you need to get a pill and give him, ASAP ! After giving him the pill, you can check for the heat and fluid, friend tip",
+	"text": "Don’t worry, it’s just the tutorial for now. But when it happens, grab the pill from the desk near the syringe and use it. [\"Press E to interact\"]",
 	"condition": TutorialCondition.Condition.InternalBleeding
 	},
 	{
-	"text": "Fuck that sound was loud bruh, I hope you understand, the more you use the syringe higher the chance of internal bleeding, but when it happens, it also reset the counter ! (Space to continue)",
+	"text": "Pretty loud, right? Every test increases the chance of causing internal bleeding. Once you fix it, the risk goes back down… but never to zero. It can happen anytime. (Space to continue)",
 	"condition": TutorialCondition.Condition.None
 	},
 	{
-	"text": "Oh, it is pretty dark in here, innit ? Press F to toggle the flashlight if you're scared of the darkness (Space to continue)",
+	"text": "That’s why failed tests are dangerous. Use the syringe wisely... (Space to continue)",
+	"condition": TutorialCondition.Condition.None
+	},
+	{
+	"text": "Oh... that’s unfortunate. The power just went out. Luckily, we left you a flashlight. You might need it. [\"Press F to toggle flashlight\"] (Space to continue)",
 	"condition": TutorialCondition.Condition.None,
 	"action": Callable(self, "_give_flashlight")
 	},
 	{
-	"text": "Obviously when the power goes off nothing work, so your main goal is to turn it on ! (Space to continue)",
-	"condition": TutorialCondition.Condition.None
-	},
-	{
-	"text": "Go turn on this bad boy",
+	"text": "Yeah... not the best lab, we know. If the power goes out, you’ll need to restart the generator. It should be somewhere near the monster. [\"Hold E on the generator\"]",
 	"condition": TutorialCondition.Condition.PowerBack
 	},
 	{
-	"text": "Ok now when he's back on track, you also need to check again the temp and fluid with the syringe because when everything's off, nothing works, right ? (Space to continue)",
+	"text": "One more thing. The temperature system and fluid pump both depend on the generator. If it’s off, things will get worse quickly... (Space to continue)",
 	"condition": TutorialCondition.Condition.None
 	},
 	{
-	"text": "Oh, I forgot, give him pills only when he's in internal bleeding, I repeat, give him pills only when he's in internal bleeding ! (Space to continue)",
+	"text": "Oh, right, the pills. Only use them if there’s internal bleeding. Otherwise, they’re useless… and we’re not sure how the creature will react. (Space to continue)",
 	"condition": TutorialCondition.Condition.None
 	},
 	{
-	"text": "Before, I go, about the fluid pump and the heat button, you need to hold E to interact with them. There are two sound you need to be aware of. (Space to continue)",
+	"text": "Before I let you go, here’s the basics. If the temperature is off, use the red button in the office. If the fluid is low, use the pump near the doorway. [\"Hold E to interact\"] (Space to continue)",
 	"condition": TutorialCondition.Condition.None
 	},
 	{
-	"text": "There is a sound that indicate that everything's good, and tells you two things, one you dosed correclty, second, next interaction might be the sound, ill tell you just in a second. (Space to continue)",
+	"text": "You’ll hear two types of sounds when interacting. A good one, and a bad one. The good sound means you did it right. The bad one… not so much. (Space to continue)",
 	"condition": TutorialCondition.Condition.None
 	},
 	{
-	"text": "If you hear the \"bad sound\" it means you didn't dosed the temp or the fluid correctly, the machine breaks and you need to wait at least 10 seconds before you can use it again. (Space to continue)",
+	"text": "If you hear the bad sound, the system locks for a few seconds. It’s a safety measure. You pushed it too far. It will also make the situation worse over time... (Space to continue)",
 	"condition": TutorialCondition.Condition.None
 	},
 	{
-	"text": "All right, that's it, Now you can go back to the desk and press the orange button, to start the game !",
+	"text": "Alright, that’s a lot, I know. You’ll get used to it. Your goal is simple: survive 6 minutes… until 6 AM. (Space to continue)",
+	"condition": TutorialCondition.Condition.None
+	},
+	{
+	"text": "Before you start, press the orange button in the office. And hey… if you enjoy the game, or have feedback, let me know. Good luck. [\"Hold the orange button to start\"]",
 	"condition": TutorialCondition.Condition.None
 	}
 ]

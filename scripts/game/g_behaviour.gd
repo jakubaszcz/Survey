@@ -15,6 +15,7 @@ func _ready() -> void:
 
 func _on_end_tutorial() -> void:
 	world_environment.environment.volumetric_fog_enabled = true
+	game_type = GameType.Type.Game
 
 func _on_game_over(type: GameOverType.Type) -> void:
 	print("Game Over")

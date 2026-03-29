@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://bbpbupob2basg" path="res://assets/floraphonic-paper-collect-9-186723.mp3" id="3_m2x4m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7222l"]
-size = Vector3(2.045044, 1, 1)
+size = Vector3(2.045044, 0.850708, 1)
 
 [node name="Syringe" type="CharacterBody3D" unique_id=1032968558 node_paths=PackedStringArray("grab_sound")]
 script = ExtResource("1_7222l")

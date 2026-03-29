@@ -10,6 +10,8 @@ extends CharacterBody3D
 
 @onready var footstep: AudioStreamPlayer3D = $Footstep
 
+@onready var flashlight: AudioStreamPlayer3D = $Flashlight
+
 var jumscare : bool = false
 
 func _ready() -> void:
@@ -23,12 +25,14 @@ func _on_jumpscare(player : Node3D) -> void:
 func _on_flashlight(state: bool) -> void:
 	spot_light_3d.visible = state
 
-func _input(event) -> void:
-	if event is InputEventKey:
-		if event.pressed:
-			if event.keycode == KEY_J:
-				print("You pressed J You dumbass")
-				AllSignals.emit_signal("prepare_jumpscare", self)
+func _input(event):
+	if event.is_action_pressed("ui_fullscreen"):
+		var mode = DisplayServer.window_get_mode()
+		
+		if mode == DisplayServer.WINDOW_MODE_WINDOWED:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func _movement_process(delta) -> void:
 	var input: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
@@ -50,7 +54,7 @@ func _physics_process(delta) -> void:
 	_movement_process(delta)
 	
 	if Input.is_action_just_pressed("flashlight"):
-		print("Flashlight toggled")
+		flashlight.play()
 		flashlight_toggle = not flashlight_toggle
 		_on_flashlight(flashlight_toggle)
 	

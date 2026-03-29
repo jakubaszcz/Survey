@@ -66,19 +66,5 @@ theme_override_font_sizes/font_size = 64
 text = "Keep it
 Cryo"
 
-[node name="Control2" type="Control" parent="." unique_id=989810297]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -726.0
-offset_top = -274.0
-offset_right = 3.0
-offset_bottom = 278.0
-grow_horizontal = 0
-grow_vertical = 2
-
 [connection signal="pressed" from="Control/Play" to="Control" method="_on_play_pressed"]
 [connection signal="pressed" from="Control/Exit" to="Control" method="_on_exit_pressed"]
